@@ -11,10 +11,10 @@ struct nodo
 class LinkedList
 {
 	private:
-		struct nodo *head;
-		struct nodo *tail;
 		int mysize;
 	public:
+		struct nodo *head;
+		struct nodo *tail;
 		LinkedList();
 		~LinkedList();
 		void insertAtTail(int n);

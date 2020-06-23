@@ -10,6 +10,8 @@
             "args": [
                 "-g",
                 "${file}",
+                "${fileDirname}/LinkedList/LinkedList.cpp",
+                "${fileDirname}/controller.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],

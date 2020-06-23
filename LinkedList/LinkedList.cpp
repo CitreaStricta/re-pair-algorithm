@@ -1,7 +1,4 @@
-#include <iostream>
 #include "LinkedList.h"
-
-using namespace std;
 
 // La lista se basa en la suposicion de que el puntero del ultimo nodo siempre es nullptr
 LinkedList::LinkedList()
@@ -144,9 +141,6 @@ int LinkedList::at(int pos)
 {
     if(pos < 0 || pos > mysize - 1)
     {
-        cout <<
-        "La lista no tiene un dato en la pocision "
-        << pos << endl;
         return -1;
     }
 
