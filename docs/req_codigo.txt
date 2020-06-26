@@ -1,0 +1,31 @@
+Requerimientos Codigo
+
+Dada una secuencia generar una "1 2 3 1 2 3" secuencia comprimida "R2"
+
+Construir una gramática que genere dicha secuencia. Para ello, 
+    - recursivamente reemplaza el par de sı́mbolos más frecuente, digamos xy por un nuevo sı́mbolo Z. 
+        En ese momento se crea una regla de la forma Z → xy.
+    - El proceso termina cuando ningún par de sı́mbolos se repite 2 veces.
+    - No se considera la forma de almacenar las reglas
+    - Se debe utilizar(e implementar) una lista doblemente enlazada
+    - Se puede usar la clase map de la stl
+    - Se puede usar la clase pair de la stl
+
+Para la primera Version
+
+La versión directa hará iteraciones sobre la secuencia mientras que en la misma haya algún par con frecuencia
+mayor a 1. Cada iteración realizará varias pasadas sobre la secuencia. En la primera pasada, para contar la frecuencia de los pares se utilizará map.
+Una vez detectado el par de mayor frecuencia, se realizará una segunda pasada reemplazando dicho par por un sı́mbolo nuevo y se pasará a la siguiente
+iteración. Notar que en cada iteración el map se debe vaciar.
+
+Pseudo codigo a partir del parrafo anterior
+
+seq[n] = {1, ..., 27}
+
+do 
+    VaciarMapa()
+    freq_max = frecuenciaMaxima(seq) // O(n) pasada 1
+    Si freq_max > 1
+        reemplazarParPorSimboloNuevo(seq) // O(n) pasada 2
+        next            
+while (freq_max >1)
