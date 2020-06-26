@@ -3,10 +3,11 @@
 class controller
 {
 private:
-    LinkedList *list;
 public:
+    LinkedList *list;
     controller();
     ~controller();
     void addSequence(int n);
+    void iterCompress();
     void printList();
 };

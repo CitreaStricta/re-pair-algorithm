@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <time.h>
+#include <map>
 
 using namespace std;
 
@@ -32,6 +33,21 @@ void controller::addSequence(int n)
     {
         list->insertAtTail(1 + rand() % 27);
     }
+}
+
+void controller::iterCompress()
+{
+    map<pair<int,int>, int> m;
+    if(list->size() == 0)
+    {
+        cout << "no hay elementos para comprimir."
+        "Ejecuta addSequence antes que iterCompress" << endl;
+        return;
+    }
+
+    //iteracion en la linked list
+    nodo *it = list->getPtrAt0();
+
 }
 
 // printea lo que esta en la lista (sin sacarlo)
