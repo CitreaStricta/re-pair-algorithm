@@ -37,7 +37,13 @@ void controller::addSequence(int n)
 
 void controller::iterCompress()
 {
-    map<pair<int,int>, int> m;
+    map<pair<int,int>, int>* m = fillMap();
+    
+}
+
+map<pair<int,int>, int>* controller::fillMap()
+{
+    map<pair<int,int>, int> *m = new map<pair<int,int>, int>();
     if(list->size() == 0)
     {
         cout << "no hay elementos para comprimir."
@@ -45,9 +51,33 @@ void controller::iterCompress()
         return;
     }
 
-    //iteracion en la linked list
-    nodo *it = list->getPtrAt0();
+    //////////iteracion en la linked list//////////
+    // creo un puntero nodo que apunta al 1er nodo de la lista
+    nodo *pNodo = list->getPtrAt0();
+    // creo un pair auxiliar para manejar los valores
+    pair<int, int> pAux;
+    // cuando la tail de la LL se alcance entonces no quedaran mas
+    // valores en la LL por los cuales iterar
+    while(pNodo->next != list->tail)
+    {
+        pAux = make_pair(pNodo->n, pNodo->next->n);
+        auto it2 = m->find(pAux);
 
+        if(it2 != m->end())
+            it2->second++;
+        else
+            m->insert(make_pair(pAux, 1));
+
+        pNodo = pNodo->next;
+    }
+    auto it2 = m->begin();
+
+    while(it2 != m->end())
+    {
+        cout << it2->first.first << " " << it2->first.second << " " << it2->second << endl;
+        it2++;
+    }
+    return m;
 }
 
 // printea lo que esta en la lista (sin sacarlo)

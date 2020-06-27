@@ -10,4 +10,5 @@ public:
     void addSequence(int n);
     void iterCompress();
     void printList();
+    map<pair<int,int>, int>* fillMap();
 };
