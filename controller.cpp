@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <time.h>
+#include <utility>
 #include <map>
 
 using namespace std;
@@ -37,8 +38,18 @@ void controller::addSequence(int n)
 
 void controller::iterCompress()
 {
-    map<pair<int,int>, int>* m = fillMap();
-    
+    if(list->size() == 0)
+    {
+        cout << "no hay elementos para comprimir."
+        "Ejecuta addSequence antes que iterCompress" << endl;
+        return;
+    }
+
+    map<pair<int,int>, int> *m = fillMap();
+    max(m->begin(), m->end());
+
+
+    delete m;
 }
 
 map<pair<int,int>, int>* controller::fillMap()
@@ -48,7 +59,8 @@ map<pair<int,int>, int>* controller::fillMap()
     {
         cout << "no hay elementos para comprimir."
         "Ejecuta addSequence antes que iterCompress" << endl;
-        return;
+        delete m;
+        return m;
     }
 
     //////////iteracion en la linked list//////////
