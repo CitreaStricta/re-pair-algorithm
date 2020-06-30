@@ -4,18 +4,19 @@
 #include <time.h>
 #include <utility>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
 controller::controller()
 {
     srand(time(NULL));
-    list = new LinkedList();
+    list = nullptr;
 }
 
 controller::~controller()
 {
-    delete list;
+    if(list != nullptr) delete list;
 }
 
 /**
@@ -28,7 +29,7 @@ controller::~controller()
 **/
 void controller::addSequence(int n)
 {
-    delete list;
+    if(list != nullptr) delete list;
     list = new LinkedList();
     for (int i = 0; i < n; i++)
     {
@@ -46,8 +47,17 @@ void controller::iterCompress()
     }
 
     map<pair<int,int>, int> *m = fillMap();
-    max(m->begin(), m->end());
 
+    // ESTO NOS DICE CUAL ES EL PAR QUE MAS SE REPITE EN LA LISTA
+    // (ESO SI, NO NECESARIAMENTE EL 1ER PAR REPETIDO)
+    map<pair<int,int>, int>::iterator best;
+
+    best = max_element(m->begin(),m->end(),[]
+    (const pair<pair<int,int>, int>& a, const pair<pair<int,int>, int>& b)->bool
+    {return a.second < b.second;});
+    auto replace = best->first;
+    cout << "Max is: " << best->first.first << " " << best->first.second << ", " << best->second << endl;
+    cout << "Tenemos que reemplasar el par: " << replace.first << " " << replace.second<< endl;
 
     delete m;
 }
@@ -86,7 +96,7 @@ map<pair<int,int>, int>* controller::fillMap()
 
     while(it2 != m->end())
     {
-        cout << it2->first.first << " " << it2->first.second << " " << it2->second << endl;
+        cout << it2->first.first << " " << it2->first.second << ", " << it2->second << endl;
         it2++;
     }
     return m;
