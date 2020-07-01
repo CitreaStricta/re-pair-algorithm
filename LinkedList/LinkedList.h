@@ -1,12 +1,7 @@
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
-
-struct nodo
-{
-	int n;
-	nodo *next;
-	nodo *prev;
-};
+#include "iterator.h"
 
 class LinkedList
 {
@@ -23,6 +18,7 @@ class LinkedList
 		nodo* getPtrAt0();
 		int at(int pos);
 		int size();
+		Iterator begin();
 };
 
 #endif

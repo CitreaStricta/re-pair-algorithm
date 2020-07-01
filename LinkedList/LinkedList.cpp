@@ -155,3 +155,8 @@ int LinkedList::size()
 {
     return mysize;
 }
+
+Iterator LinkedList::begin(){
+    Iterator it = Iterator(getPtrAt0(), tail);
+    return it;
+}
