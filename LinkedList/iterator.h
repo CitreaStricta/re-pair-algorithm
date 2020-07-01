@@ -1,9 +1,4 @@
-struct nodo
-{
-	int n;
-	nodo *next;
-	nodo *prev;
-};
+#include "nodo.h"
 
 class Iterator
 {

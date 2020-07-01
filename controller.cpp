@@ -76,28 +76,30 @@ map<pair<int,int>, int>* controller::fillMap()
     //////////iteracion en la linked list//////////
     // creo un puntero nodo que apunta al 1er nodo de la lista
     nodo *pNodo = list->getPtrAt0();
+    Iterator it = list->begin();
     // creo un pair auxiliar para manejar los valores
     pair<int, int> pAux;
     // cuando la tail de la LL se alcance entonces no quedaran mas
     // valores en la LL por los cuales iterar
-    while(pNodo->next != list->tail)
+    map<pair<int,int>, int>::iterator itMap;
+    while(it.nodo() != it.end())
     {
-        pAux = make_pair(pNodo->n, pNodo->next->n);
-        auto it2 = m->find(pAux);
+        pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
+        itMap = m->find(pAux);
 
-        if(it2 != m->end())
-            it2->second++;
+        if(itMap != m->end())
+            itMap->second++;
         else
             m->insert(make_pair(pAux, 1));
 
-        pNodo = pNodo->next;
+        it++;
     }
-    auto it2 = m->begin();
+    auto itMap2 = m->begin();
 
-    while(it2 != m->end())
+    while(itMap2 != m->end())
     {
-        cout << it2->first.first << " " << it2->first.second << ", " << it2->second << endl;
-        it2++;
+        cout << itMap2->first.first << " " << itMap2->first.second << ", " << itMap2->second << endl;
+        itMap2++;
     }
     return m;
 }
