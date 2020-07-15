@@ -1,5 +1,4 @@
 #include "nodo.h"
-
 class Iterator
 {
 private:

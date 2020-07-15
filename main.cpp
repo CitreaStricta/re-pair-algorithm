@@ -1,7 +1,9 @@
 #include "controller.h"
 #include <iostream>
+#include <iterator>
 
 using namespace std;
+
 
 int main()
 {
@@ -9,6 +11,14 @@ int main()
     c->addSequence(50);
     c->printList();
     c->iterCompress();
+
+    while(!c->reglaFinal->empty())
+    {
+        cout << c->reglaFinal->front() << " ";
+        c->reglaFinal->pop();
+    }
+    cout << endl;
+    
     delete c;
     return 0;
 }
