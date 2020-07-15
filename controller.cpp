@@ -82,7 +82,7 @@ map<pair<int,int>, int>* controller::fillMap()
     // cuando la tail de la LL se alcance entonces no quedaran mas
     // valores en la LL por los cuales iterar
     map<pair<int,int>, int>::iterator itMap;
-    while(it.nodo() != it.end())
+    while(it.nodo()->next != it.end())
     {
         pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
         itMap = m->find(pAux);

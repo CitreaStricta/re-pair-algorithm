@@ -74,3 +74,41 @@ par, freq
 4 29, 1
 
 muere
+
+Para la segunda iteracion
+
+En la versión avanzada, cada nodo de la lista doblemente enlazada contendrá dos punteros adicionales, uno a la ocurrencia previa del mismo par y otro a la 
+ocurrencia siguiente a dicho par. El map, además de la frecuencia del par, almacenará un puntero a la primera ocurrencia del par y un puntero a la última ocurrencia
+del par. Por último, se implementará un MAX-heap cuya clave será la frecuencia y, por cada nodo, el valor será el par correspondiente (notar que estos nodos
+son conceptuales, ya que MAX-heap se puede implementar sobre un arreglo o vector). El heap implementado debe permitir una operación adicional a las habituales la
+cual, dado un nodo, permitirá modificar su clave (notar que esto puede subir o bajar al nodo en el heap).
+
+
+Lista Doblemente Enlazada con punteros adicionales
+    - prev_pair
+    - next_pair
+
+Map debe incluir
+    - Frecuencia del par
+    - puntero a la primera ocurrencia del par 
+    - puntero a la ultima ocurrencia del par
+
+MAX heap que debe incluir todos los nodos
+    - clave: frequencia del par 
+    - valor: par correspondiente 
+    - implementar funcion { fun(nodo) -> modificar(nodo)}
+
+
+También es posible que un clave llegue a valer 0, pero no es necesario eliminar el nodo correspondiente. 
+
+El algoritmo funcionará del siguiente modo: 
+    en una primera pasada se inicializará el map, el heap y los punteros de la lista doblemente enlazada. 
+    Después, iterativamente se solicitará al heap el par de mayor frecuencia. 
+        Si la frecuencia es menor que 2, se termina el algoritmo. 
+        Mientras que la frecuencia obtenida sea 2 o más, 
+            se creará un nuevo sı́mbolo (incremental sobre el anterior) que reemplazará a dicho par en la secuencia. 
+            Por cada substitución en la secuencia se puede tener que: 
+                crear un nuevo par (con el nuevo sı́mbolo y quien lo precede/sucede), modificar la frecuencia de un par y/o eliminar un par. 
+                se deben mantener los punteros en la lista doblemente enlazada. 
+                Estos detalles de implementación pueden complicar el proyecto, 
+                por lo que se recomienda realizar un ejemplo completo en papel en el que se analicen todos los casos.

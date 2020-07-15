@@ -71,7 +71,7 @@ void LinkedList::insertAtTail(int n)
 /*
  * resive el valor a guardar y un puntero
  * al nodo siguiente en donde voy a posicionar mi nuevo nodo
- * 
+ *  
  * Ej: Si tengo [nodo0->nodo1->nodo2->nodo3->nodo4]
  * y quiero colocar un nodo en la pocision 4, entonces
  * el metodo tiene que resivir un puntero al [nodo3]
