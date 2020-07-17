@@ -1,10 +1,7 @@
-struct nodo
-{
-	int n;
-	nodo *next;
-	nodo *prev;
-};
+#ifndef ITERATOR_H
+#define ITERATOR_H
 
+#include "nodo.h"
 class Iterator
 {
 private:
@@ -21,3 +18,5 @@ public:
     struct nodo* end();
     struct nodo* nodo(); 
 };
+
+#endif

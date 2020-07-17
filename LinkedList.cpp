@@ -1,22 +1,25 @@
-#include <iostream>
 #include "LinkedList.h"
-
-using namespace std;
 
 // La lista se basa en la suposicion de que el puntero del ultimo nodo siempre es nullptr
 LinkedList::LinkedList()
 {
     // ambos nodos, head y tail, estan apuntando, con next y prev
     // respectivamente, a tail y head respectivamente
+    // (el resto de los punteros de cada uno estara SIEMPRE apuntando a nullptr)
     head = new nodo();
     head->next = tail;
     head->n = -2;
     head->prev = nullptr;
+    head->nextOcurr = nullptr;
+    head->prevOcurr = nullptr;
     
     tail = new nodo();
     tail->prev = head;
     tail->n = -2;
     tail->next = nullptr;
+    tail->nextOcurr = nullptr;
+    tail->prevOcurr = nullptr;
+
     mysize = 0;
 }
 
@@ -35,8 +38,11 @@ LinkedList::~LinkedList()
     //mientras que head siga apuntando a algo
     while(head->next != nullptr)
     {
-        // desrreferencia el prev del nodo siguiente de head por seguridad
+        // desrreferencia los ptr prev/nextOcurr/prevOcurr
+        // del nodo siguiente de head por seguridad
         head->next->prev = nullptr;
+        head->next->nextOcurr = nullptr;
+        head->next->prevOcurr = nullptr;
         // apunta delete_Aux al nodo que sigue de head
         delete_Aux = head->next;
         // apunto el next de head al nodo subsiguiente de head
@@ -54,6 +60,9 @@ void LinkedList::insertAtTail(int n)
 {
     // creo el nuevo nodo
     nodo *aux = new nodo();
+    // inicializo nextOcurr y prevOcurr a nullptr
+    aux->nextOcurr = nullptr;
+    aux->prevOcurr = nullptr;
     // le entrego su valor
     aux->n = n;
     // apunto next de aux a tail
@@ -64,10 +73,11 @@ void LinkedList::insertAtTail(int n)
     // apunto el next (de lo que ahora esta apuntando el prev de aux)
     // a aux
     aux->prev->next = aux;
-    //y ahora algo parecido
-    //apunto el prev (de lo que ahora esta apuntando el next de aux)
+    // y ahora algo parecido
+    // apunto el prev (de lo que ahora esta apuntando el next de aux)
     // a aux
     aux->next->prev = aux;
+    
     mysize++;
 }
 
@@ -84,6 +94,9 @@ void LinkedList::insertAt(int n, nodo* k)
 {
     // creo el nuevo nodo
     nodo *aux = new nodo();
+    // inicializo nextOcurr y prevOcurr a nullptr
+    aux->nextOcurr = nullptr;
+    aux->prevOcurr = nullptr;
     // le entrego su valor
     aux->n = n;
     // apunto el next de aux a k
@@ -113,7 +126,7 @@ void LinkedList::insertAt(int n, nodo* k)
  * ([nodo0->next] en este caso)
 */
 void LinkedList::popAt(nodo *k)
-{
+{   
     // creo mi nodo auxiliar y lo apunto al nodo a popear
     nodo *pop_Aux = k;
     // apunto el next
@@ -124,10 +137,15 @@ void LinkedList::popAt(nodo *k)
     // (del nodo que esta siendo apuntando por el next de pop_Aux)
     // al nodo que esta diendo apuntado por el prev de pop_Aux
     pop_Aux->next->prev = pop_Aux->prev;
-    // desreferencio a los punteros prev y next de pop_aux por seguridad
+    // desreferencio a los punteros prev/next/prevOcurr/nextOcurr
+    // de pop_aux por seguridad
     pop_Aux->prev = pop_Aux->next = nullptr;
+    pop_Aux->prevOcurr = nullptr;
+    pop_Aux->nextOcurr = nullptr;
     // y ahora puedo popear con seguridad el nodo pop_Aux
-    // (actually delete it like a boss. WARAAAAAP)
+    // ("NOOO YOU CANT JUST SAY YOU ARE POPING A NODE WHEN YOU ARE
+    // ACTUALLY DELETEING IT"
+    // "haha. Nodes deletion goes brr")
     delete pop_Aux;
     mysize--;
 }
@@ -144,9 +162,6 @@ int LinkedList::at(int pos)
 {
     if(pos < 0 || pos > mysize - 1)
     {
-        cout <<
-        "La lista no tiene un dato en la pocision "
-        << pos << endl;
         return -1;
     }
 

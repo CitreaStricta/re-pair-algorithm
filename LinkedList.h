@@ -1,6 +1,7 @@
+#ifndef LL_H
+#define LL_H
 
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#include "nodo.h"
 #include "iterator.h"
 
 class LinkedList
@@ -8,8 +9,8 @@ class LinkedList
 	private:
 		int mysize;
 	public:
-		nodo *head;
-		nodo *tail;
+		struct nodo *head;
+		struct nodo *tail;
 		LinkedList();
 		~LinkedList();
 		void insertAtTail(int n);
