@@ -90,13 +90,14 @@ Lista Doblemente Enlazada con punteros adicionales
 
 Map debe incluir
     - Frecuencia del par
-    - puntero a la primera ocurrencia del par 
-    - puntero a la ultima ocurrencia del par
+    - puntero a la primera ocurrencia del par -> lista enlazada
+    - puntero a la ultima ocurrencia del par -> lista enlazada
+    - puntero nodo heap
 
-MAX heap que debe incluir todos los nodos
-    - clave: frequencia del par 
-    - valor: par correspondiente 
-    - implementar funcion { fun(nodo) -> modificar(nodo)}
+MAX_heap que debe incluir todos los nodos
+    - clave: frequencia del par
+    - valor: par correspondiente
+    - implementar funcion { fun(nodo) -> modificar(nodo) }
 
 
 También es posible que un clave llegue a valer 0, pero no es necesario eliminar el nodo correspondiente. 
@@ -108,7 +109,10 @@ El algoritmo funcionará del siguiente modo:
         Mientras que la frecuencia obtenida sea 2 o más, 
             se creará un nuevo sı́mbolo (incremental sobre el anterior) que reemplazará a dicho par en la secuencia. 
             Por cada substitución en la secuencia se puede tener que: 
-                crear un nuevo par (con el nuevo sı́mbolo y quien lo precede/sucede), modificar la frecuencia de un par y/o eliminar un par. 
-                se deben mantener los punteros en la lista doblemente enlazada. 
+                Casos
+                    max_heap -> crear un nuevo par (con el nuevo sı́mbolo y quien lo precede/sucede), 
+                    max_heap -> modificar la frecuencia de un par.
+                    max_heap -> eliminar un par.
+                se deben mantener los punteros en la lista doblemente enlazada.
                 Estos detalles de implementación pueden complicar el proyecto, 
                 por lo que se recomienda realizar un ejemplo completo en papel en el que se analicen todos los casos.
