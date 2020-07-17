@@ -12,9 +12,8 @@
                 "${file}",
                 "${fileDirname}/LinkedList/iterator.cpp",
                 "${fileDirname}/LinkedList/LinkedList.cpp",
-                "${fileDirname}/controller.cpp",
-                "${fileDirname}/Solucion2/HeapNode.cpp",
-                "${fileDirname}/Solucion2/MaxHeap.cpp",
+                "${fileDirname}/controller.cpp",                
+                "${fileDirname}/Solucion2/MaxHeap2.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],

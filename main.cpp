@@ -1,7 +1,7 @@
 #include "controller.h"
 #include <iostream>
 #include <iterator>
-#include "./Solucion2/MaxHeap.h"
+#include "./Solucion2/MaxHeap2.h"
 
 using namespace std;
 
@@ -13,17 +13,45 @@ int main()
     for (int i = 0; i < 21; i++)
         vec->push_back(arr[i]);
 
-    MaxHeap* heap = new MaxHeap();
+    MaxHeap2* heap = new MaxHeap2();
     
     auto it = vec->begin();
 
-    while (it < vec->end()) {
+    while (it+1 < vec->end()) {
         auto pair = make_pair(*it, *(std::next(it, 1)));
-        heap->insertItem(pair, &(*it));
+        heap->insert(pair);
         it++;
     }
 
-    auto it2 = vec->begin();
+    heap->printHeap();
+    heap->printIndexes();
+
+    cout << "aumentar frecuencia" << endl;
+
+    heap->insert(make_pair(8, 6));
+    heap->insert(make_pair(8, 6));
+    heap->insert(make_pair(8, 6));
+
+    heap->printHeap();
+    heap->printIndexes();
+
+    cout << "get max" << endl;
+    auto max = heap->getMax();
+    cout << "(" << max.first << ", {" << max.second.first << ", " << max.second.second << "})" << endl;
+    heap->printHeap();
+    heap->printIndexes();
+
+    cout << "extract max" << endl;
+    heap->extractMax();    
+    heap->printHeap();
+    heap->printIndexes();
+
+    cout << "updateFrequency" << endl;
+    heap->updateFrequency(make_pair(4, 6), -1);    
+    heap->printHeap();
+    heap->printIndexes();
+
+
     // controller *c = new controller();
     // c->addSequence(1000);
     // c->printList();
