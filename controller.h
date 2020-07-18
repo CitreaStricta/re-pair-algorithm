@@ -10,15 +10,14 @@ using namespace std;
 class controller
 {
 private:
+    vector<pair<int, pair<int, int>>> *respUno;
+    vector<pair<int, pair<int, int>>> *respDos;
 public:
-    stack<pair<int, pair<int, int>>> *reglas;
-    queue<int> *reglaFinal;
-    LinkedList *list;
+    LinkedList *listU;
+    LinkedList *listD;
     controller();
     ~controller();
+    void sUno();
     void addSequence(int);
-    void iterCompress();
-    void iterParCompress(int, pair<int, int>);
     void printList();
-    map<pair<int, int>, int>* fillMap();
 };
