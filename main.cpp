@@ -1,11 +1,8 @@
-#include "controller.h"
 #include <iostream>
 #include <iterator>
-#include "./Solucion2/MaxHeap.h"
+#include "Solucion2/helper.cpp"
 
 using namespace std;
-
-
 int main()
 {
     vector<int>* vec = new vector<int>();

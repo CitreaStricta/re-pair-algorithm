@@ -1,5 +1,4 @@
-#include "./LinkedList/nodo.h"
-#include "./LinkedList/LinkedList.h"
+#include "../LinkedList/LinkedList.h"
 #include "MaxHeap.h"
 
 struct helper {
@@ -8,7 +7,7 @@ struct helper {
     int heapIndex;
 };
 
-LinkedList *compress(LinkedList *list) {
+static LinkedList *compress(LinkedList *list) {
     auto maxHeap = new MaxHeap();
     auto map = new std::map<pair<int, int>, helper *>();
     auto it = list->begin(); 
@@ -19,5 +18,6 @@ LinkedList *compress(LinkedList *list) {
         auto nodo1 = nodo->next; 
         auto pair = make_pair(nodo->n, nodo1->n);
         maxHeap->insert(pair);
-    }    
+    }   
+    return new LinkedList(); 
 }
