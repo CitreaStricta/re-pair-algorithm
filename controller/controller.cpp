@@ -1,4 +1,5 @@
 #include "controller.h"
+
 using namespace std;
 
 controller::controller()
@@ -11,7 +12,7 @@ controller::controller()
 controller::~controller()
 {
     if(listU != nullptr) delete listU;
-    if(listU != nullptr) delete listD;
+    if(listD != nullptr) delete listD;
     delete respUno;
     delete respDos;
 }
@@ -48,8 +49,8 @@ void controller::sUno()
     //     return;
     // }
 
-    // solUno *sUno = new solUno(listU);
-    // respUno = sUno->Compress();
+    // solUno *sUno = new solUno();
+    // respUno = sUno->Compress(listU);
     // delete sUno;
 }
 
@@ -61,7 +62,8 @@ void controller::sDos()
         return;
     }
 
-    
+    listD = compress(listD);
+    return;
 }
 
 // hace lo que crees que hace
