@@ -1,7 +1,7 @@
 #include "controller.h"
 #include <iostream>
 #include <iterator>
-#include "./Solucion2/MaxHeap2.h"
+#include "./Solucion2/MaxHeap.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int main()
     for (int i = 0; i < 21; i++)
         vec->push_back(arr[i]);
 
-    MaxHeap2* heap = new MaxHeap2();
+    MaxHeap* heap = new MaxHeap();
     
     auto it = vec->begin();
 
@@ -50,7 +50,6 @@ int main()
     heap->updateFrequency(make_pair(4, 6), -1);    
     heap->printHeap();
     heap->printIndexes();
-
 
     // controller *c = new controller();
     // c->addSequence(1000);

@@ -9,7 +9,7 @@ public:
     Iterator(struct nodo* begin, struct nodo* end);
     ~Iterator();
     Iterator& operator++(int);
-    Iterator& operator--(int);
+    Iterator& operator--(int);    
     void goToStart();
     struct nodo* begin();
     struct nodo* end();
