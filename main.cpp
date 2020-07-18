@@ -1,5 +1,6 @@
 #include "controller/controller.h"
 #include <iostream>
+#include "Solucion2/Solucion2.h"
 // #include <iterator>
 
 using namespace std;
@@ -7,8 +8,12 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(50);
+    c->addSequence(200);
+    Solucion2* sol2 = new Solucion2(c->listD);
+    c->printListD();
+    sol2->compress();
 
+    sol2->printCompress();    
     // while (it+1 < vec->end()) {
     //     auto pair = make_pair(*it, *(std::next(it, 1)));
     //     heap->insert(pair);
@@ -57,6 +62,7 @@ int main()
     //
     // delete c;
     // return 0;
-    delete c;
+    //delete c;
+    //delete sol2;
     return 0;
 }

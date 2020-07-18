@@ -54,17 +54,17 @@ void controller::sUno()
     // delete sUno;
 }
 
-void controller::sDos()
-{
-    if(listU == nullptr)
-    {
-        cout << "1ero ejecuta addSequence" << endl;
-        return;
-    }
+// void controller::sDos()
+// {
+//     if(listU == nullptr)
+//     {
+//         cout << "1ero ejecuta addSequence" << endl;
+//         return;
+//     }
 
-    listD = compress(listD);
-    return;
-}
+//     listD = compress(listD);
+//     return;
+// }
 
 // hace lo que crees que hace
 void controller::printListU()
@@ -91,18 +91,4 @@ void controller::printListD()
         aux = listU->at(i++);
     }
     cout << endl;
-}
-
-void controller::compress() {
-    auto maxHeap = new MaxHeap();
-    auto map = new std::map<pair<int, int>, helper *>();
-    auto it = listD->begin(); 
-    auto last = it.end();
-    auto nodo = it.nodo();
-    last = last->prev->prev;
-    while (nodo != last) {
-        auto nodo1 = nodo->next; 
-        auto pair = make_pair(nodo->n, nodo1->n);
-        maxHeap->insert(pair);
-    }   
 }

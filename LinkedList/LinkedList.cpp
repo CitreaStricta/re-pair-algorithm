@@ -129,19 +129,25 @@ void LinkedList::popAt(nodo *k)
 {   
     // creo mi nodo auxiliar y lo apunto al nodo a popear
     nodo *pop_Aux = k;
+    if (pop_Aux->nextOcurr != nullptr)
+        pop_Aux->nextOcurr->prevOcurr = nullptr;
+    if (pop_Aux->prevOcurr != nullptr)
+        pop_Aux->prevOcurr->nextOcurr = nullptr;
     // apunto el next
     // (del nodo que esta siendo apuntando por el prev de pop_Aux)
     // al nodo que esta diendo apuntado por el next de pop_Aux
-    pop_Aux->prev->next = pop_Aux->next;
+    if (pop_Aux->prev != nullptr)
+        pop_Aux->prev->next = pop_Aux->next;    
     // apunto el prev
     // (del nodo que esta siendo apuntando por el next de pop_Aux)
-    // al nodo que esta diendo apuntado por el prev de pop_Aux
-    pop_Aux->next->prev = pop_Aux->prev;
+    // al nodo que esta diendo apuntado por el prev de pop_Aux    
+    if (pop_Aux->next != nullptr)
+        pop_Aux->next->prev = pop_Aux->prev;
     // desreferencio a los punteros prev/next/prevOcurr/nextOcurr
     // de pop_aux por seguridad
     pop_Aux->prev = pop_Aux->next = nullptr;
     pop_Aux->prevOcurr = nullptr;
-    pop_Aux->nextOcurr = nullptr;
+    pop_Aux->nextOcurr = nullptr;    
     // y ahora puedo popear con seguridad el nodo pop_Aux
     // ("NOOO YOU CANT JUST SAY YOU ARE POPING A NODE WHEN YOU ARE
     // ACTUALLY DELETEING IT"

@@ -1,3 +1,5 @@
+#ifndef MAX_HEAP
+#define MAX_HEAP
 #include <iostream>
 #include <utility>
 #include <vector>
@@ -11,7 +13,6 @@ private:
     int parent(int index);
     int left(int index);
     int right(int index);
-    int getIndex(std::pair<int, int> pair);
     void updateIndex(std::pair<int, int> pair, int newIndex);
     std::map<pair<int, int>, int>* posiciones;
     vector<pair<int, pair<int, int>>>* vect;
@@ -20,6 +21,7 @@ public:
     ~MaxHeap();
     std::pair<int, std::pair<int, int>> getMax(); 
     std::pair<int, std::pair<int, int>> extractMax();
+    int getIndex(std::pair<int, int> pair);
     void swap(int i1, int i2);
     void insert(std::pair<int, int> pair);
     void shiftUp(int index);
@@ -31,3 +33,4 @@ public:
     std::vector<std::pair<int, std::pair<int, int>>>::iterator begin();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator end();
 };
+#endif

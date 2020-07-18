@@ -14,7 +14,7 @@
                 "${fileDirname}/LinkedList/LinkedList.cpp",
                 "${fileDirname}/controller/controller.cpp",
                 "${fileDirname}/Solucion2/MaxHeap.cpp",
-                "${fileDirname}/Solucion2/helper.cpp",
+                "${fileDirname}/Solucion2/Solucion2.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],
