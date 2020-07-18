@@ -7,6 +7,12 @@
 
 using namespace std;
 
+struct helper {
+    nodo *first;
+    nodo *last;
+    int heapIndex;
+};
+
 class controller
 {
 private:
@@ -22,4 +28,5 @@ public:
     void addSequence(int);
     void printListU();
     void printListD();
+    void compress();
 };

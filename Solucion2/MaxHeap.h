@@ -8,7 +8,6 @@ using namespace std;
 class MaxHeap
 {
 private:
-    int _size = 0;    
     int parent(int index);
     int left(int index);
     int right(int index);
