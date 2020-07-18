@@ -1,13 +1,6 @@
 #include "solUno.h"
-using namespace std;
 
-/**
- * resive un puntero de tipo LinkedList
-*/
-solUno::solUno(LinkedList *l)
-{
-    list = l;
-}
+solUno::solUno(){}
 
 solUno::~solUno(){}
 
@@ -32,9 +25,12 @@ void solUno::ParCompress(int regla, pair<int, int> par)
     }
 }
 
-// comprime los nodos de la LinkedList y devuelve un vector de pares< int, par: int, int >
-vector<pair<int, pair<int, int>>>* solUno::Compress()
+// resive un puntero de tipo LinkedList,
+// comprime los nodos de esta y devuelve un vector de pares< int, par: int, int >
+// que funcionan como las reglas de compresion
+vector<pair<int, pair<int, int>>>* solUno::Compress(LinkedList *l)
 {
+    list = l;
     vector<pair<int, pair<int, int>>> *reglas = new vector<pair<int, pair<int, int>>>();
     int regla = 28;
     if(list->size() == 0)

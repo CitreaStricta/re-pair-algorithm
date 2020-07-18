@@ -1,4 +1,5 @@
 #include "controller.h"
+
 using namespace std;
 
 controller::controller()
@@ -48,8 +49,8 @@ void controller::sUno()
         return;
     }
 
-    solUno *sUno = new solUno(listU);
-    respUno = sUno->Compress();
+    solUno *sUno = new solUno();
+    respUno = sUno->Compress(listU);
     delete sUno;
 }
 

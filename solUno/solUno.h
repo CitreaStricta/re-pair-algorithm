@@ -12,9 +12,9 @@ class solUno
 private:
     LinkedList *list;
 public:
-    solUno(LinkedList*);
+    solUno();
     ~solUno();
-    vector<pair<int, pair<int, int>>>* Compress();
+    vector<pair<int, pair<int, int>>>* Compress(LinkedList*);
     void ParCompress(int, pair<int, int>);
     map<pair<int, int>, int>* fillMap();
 };

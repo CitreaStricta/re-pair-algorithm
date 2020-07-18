@@ -13,7 +13,7 @@
                 "${fileDirname}/LinkedList/LinkedList.cpp",
                 "${fileDirname}/LinkedList/iterator.cpp",
                 "${fileDirname}/solUno/solUno.cpp",
-                "${fileDirname}/controller.cpp",
+                "${fileDirname}/controller/controller.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],

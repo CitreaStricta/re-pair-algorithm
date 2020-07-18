@@ -1,5 +1,5 @@
-#include "LinkedList/LinkedList.h"
-#include "solUno/solUno.h"
+#include "../LinkedList/LinkedList.h"
+#include "../solUno/solUno.h"
 #include <iostream>
 #include <utility>
 #include <stack>
