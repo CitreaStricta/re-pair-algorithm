@@ -53,8 +53,26 @@ void controller::sUno()
     delete sUno;
 }
 
+void controller::sDos()
+{
+    
+}
+
 // hace lo que crees que hace
-void controller::printList()
+void controller::printListU()
+{
+    respUno;
+    int aux = listU->at(0);
+    int i = 1;
+    while(aux > 0)
+    {
+        cout << aux << " ";
+        aux = listU->at(i++);
+    }
+    cout << endl;
+}
+
+void controller::printListD()
 {
     respUno;
     int aux = listU->at(0);

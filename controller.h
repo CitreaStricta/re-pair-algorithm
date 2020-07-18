@@ -19,6 +19,8 @@ public:
     controller();
     ~controller();
     void sUno();
+    void sDos();
     void addSequence(int);
-    void printList();
+    void printListU();
+    void printListD();
 };
