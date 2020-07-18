@@ -9,9 +9,9 @@ class MaxHeap
 {
 private:
     int _size = 0;    
-    int parent(int index) { return (index - 1) / 2; }; 
-    int left(int index) { return (index*2) + 1; }; 
-    int right(int index) { return (index*2) + 2; }; 
+    int parent(int index);
+    int left(int index);
+    int right(int index);
     int getIndex(std::pair<int, int> pair);
     void updateIndex(std::pair<int, int> pair, int newIndex);
     std::map<pair<int, int>, int>* posiciones;

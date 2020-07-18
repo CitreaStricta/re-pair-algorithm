@@ -163,3 +163,15 @@ std::vector<std::pair<int, std::pair<int, int>>>::iterator  MaxHeap::end(){
     auto it = this->vect->end();
     return it;
 }
+
+int MaxHeap::parent(int index){
+    return (index - 1) / 2;
+}
+
+int MaxHeap::left(int index){
+    return (index*2) + 1;
+}
+
+int MaxHeap::right(int index){
+    return (index*2) + 2;
+} 

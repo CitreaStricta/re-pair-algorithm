@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iterator>
-#include "Solucion2/helper.cpp"
+#include "Solucion2/helper.h"
 
 using namespace std;
 int main()
