@@ -1,5 +1,4 @@
 #include "controller.h"
-
 using namespace std;
 
 controller::controller()

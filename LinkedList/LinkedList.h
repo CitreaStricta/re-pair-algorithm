@@ -1,3 +1,6 @@
+#ifndef LL_H
+#define LL_H
+
 #include "nodo.h"
 #include "iterator.h"
 
@@ -18,3 +21,5 @@ class LinkedList
 		int size();
 		Iterator begin();
 };
+
+#endif

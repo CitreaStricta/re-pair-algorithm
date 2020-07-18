@@ -1,0 +1,40 @@
+input: un texto >> gramatica >> reemplaza par xy mas frecuente por un simbolo Z hasta que ningun par se repite dos veces. Se generan las reglas recursivamente >> gramatica >> texto.
+
+Dos versiones: una directa y otra avanzada
+
+Implementacion
+
+La secuencia es una lista doblemente enlazada implementada por nosotros.
+Se puede usar map
+procesaremos una secuencia de numeros enteros entre 1 y sigma
+Los simbolos que se iran creando tambien seran enteros secuenciales comenzando en sigma + 1
+
+Version Directa
+	La version directa itera varias veces sobre la secuencia mientras haya un par con frecuencia mayor a 1(se puede usar map)
+Vaciar en cada iteracion el map
+
+
+
+Ejemplo i = 1
+
+w = ”xabcabcy123123zabc”
+
+Gramatica
+
+R1-> ab
+
+w1 = ”xR1cR1cy123123zR1c”
+
+i=2 to 6?
+
+Gramatica
+
+R1-> ab
+R2-> R1c
+R3-> 12
+R4-> R3R3
+R5-> R2R2
+R6-> R4R4
+
+w2 = ”xR5yR6zR2”
+

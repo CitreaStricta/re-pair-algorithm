@@ -10,8 +10,9 @@
             "args": [
                 "-g",
                 "${file}",
-                "${fileDirname}/LinkedList/iterator.cpp",
                 "${fileDirname}/LinkedList/LinkedList.cpp",
+                "${fileDirname}/LinkedList/iterator.cpp",
+                "${fileDirname}/solUno/solUno.cpp",
                 "${fileDirname}/controller.cpp",
                 "${fileDirname}/Solucion2/HeapNode.cpp",
                 "${fileDirname}/Solucion2/MaxHeap.cpp",
