@@ -62,8 +62,9 @@ void controller::sDos()
         return;
     }
 
-    listD = compress(listD);
-    return;
+    solDos *sDos = new solDos();
+    sDos->Compress(listD);
+    delete sDos;
 }
 
 // hace lo que crees que hace
@@ -91,18 +92,4 @@ void controller::printListD()
         aux = listU->at(i++);
     }
     cout << endl;
-}
-
-void controller::compress() {
-    auto maxHeap = new MaxHeap();
-    auto map = new std::map<pair<int, int>, helper *>();
-    auto it = listD->begin(); 
-    auto last = it.end();
-    auto nodo = it.nodo();
-    last = last->prev->prev;
-    while (nodo != last) {
-        auto nodo1 = nodo->next; 
-        auto pair = make_pair(nodo->n, nodo1->n);
-        maxHeap->insert(pair);
-    }   
 }

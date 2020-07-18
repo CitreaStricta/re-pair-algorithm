@@ -1,18 +1,10 @@
 #include "../LinkedList/LinkedList.h"
-#include "../Solucion2/MaxHeap.h"
-#include "../Solucion2/helper.h"
+#include "../solDos/solDos.h"
 #include <iostream>
 #include <utility>
 #include <vector>
 
 using namespace std;
-
-struct helper {
-    nodo *first;
-    nodo *last;
-    int heapIndex;
-};
-
 class controller
 {
 private:

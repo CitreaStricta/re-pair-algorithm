@@ -8,6 +8,7 @@ int main()
     controller *c = new controller();
 
     c->addSequence(50);
+    c->sDos();
 
     // while (it+1 < vec->end()) {
     //     auto pair = make_pair(*it, *(std::next(it, 1)));

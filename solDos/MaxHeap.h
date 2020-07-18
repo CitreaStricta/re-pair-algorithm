@@ -1,3 +1,6 @@
+#ifndef MH_H
+#define MH_H
+
 #include <iostream>
 #include <utility>
 #include <vector>
@@ -31,3 +34,5 @@ public:
     std::vector<std::pair<int, std::pair<int, int>>>::iterator begin();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator end();
 };
+
+#endif
