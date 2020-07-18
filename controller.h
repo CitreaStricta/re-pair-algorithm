@@ -1,5 +1,6 @@
 #include "LinkedList/LinkedList.h"
 #include "Solucion2/MaxHeap.h"
+#include "Solucion2/helper.h"
 #include <iostream>
 #include <utility>
 #include <vector>
