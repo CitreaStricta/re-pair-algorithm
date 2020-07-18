@@ -1,10 +1,8 @@
 #include "LinkedList/LinkedList.h"
-#include "solUno/solUno.h"
+#include "Solucion2/MaxHeap.h"
 #include <iostream>
 #include <utility>
-#include <stack>
-#include <queue>
-#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +17,8 @@ public:
     controller();
     ~controller();
     void sUno();
+    void sDos();
     void addSequence(int);
-    void printList();
+    void printListU();
+    void printListD();
 };
