@@ -1,3 +1,6 @@
+#ifndef ITERATOR_H
+#define ITERATOR_H
+
 #include "nodo.h"
 class Iterator
 {
@@ -15,3 +18,5 @@ public:
     struct nodo* end();
     struct nodo* nodo(); 
 };
+
+#endif
