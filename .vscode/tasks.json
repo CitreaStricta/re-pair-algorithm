@@ -15,6 +15,7 @@
                 "${fileDirname}/controller/controller.cpp",
                 "${fileDirname}/Solucion2/MaxHeap.cpp",
                 "${fileDirname}/Solucion2/Solucion2.cpp",
+                "${fileDirname}/SolUno/solUno.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],

@@ -8,12 +8,16 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(200);
-    Solucion2* sol2 = new Solucion2(c->listD);
-    c->printListD();
+    c->addSequence(100);
+    Solucion2* sol2 = new Solucion2(c->listU);
+    
     sol2->compress();
+    c->sUno();
+    c->printListD();
+    c->printListU();
+    sol2->printCompress();
 
-    sol2->printCompress();    
+
     // while (it+1 < vec->end()) {
     //     auto pair = make_pair(*it, *(std::next(it, 1)));
     //     heap->insert(pair);
