@@ -13,7 +13,7 @@ Solucion2::~Solucion2() {
 }
 
 void Solucion2::compress() {
-    loadData();
+    loadData();    
     auto max = maxHeap->extractMax();
     while (max.first > 1) {
         auto ref = references->at(max.second);
@@ -26,7 +26,12 @@ void Solucion2::compress() {
 
 void Solucion2::compressPair(nodo* curNode, int replacement) {    
     references->erase(make_pair(curNode->n, curNode->next->n)); 
+    nodo* nextOca;
     do {
+        if (curNode->nextOcurr == curNode->next)
+            nextOca = curNode->nextOcurr->nextOcurr;
+        else
+            nextOca = curNode->nextOcurr;
         // borrado y update
         if (curNode->prev != nullptr) {
             auto del_prev_pair = make_pair(curNode->prev->n, curNode->n);
@@ -42,18 +47,20 @@ void Solucion2::compressPair(nodo* curNode, int replacement) {
         list->popAt(nodeToDelete);       
         // insertar nuevos pares
         curNode->n = replacement;
-        if (curNode->prev != nullptr) {
+        if (curNode->prev != nullptr && curNode->prev->n != -2) {
             auto new_prev_pair = make_pair(curNode->prev->n, curNode->n);
             maxHeap->insert(new_prev_pair);
             updateReference(new_prev_pair, curNode->prev);
         }
-        if (curNode->next != nullptr && curNode->next->next != nullptr) {
+        curNode->nextOcurr = nullptr;
+        curNode->prevOcurr = nullptr;
+        if (curNode->next != nullptr && curNode->next->next != nullptr) {            
             auto new_next_pair = make_pair(curNode->n, curNode->next->n);
             maxHeap->insert(new_next_pair);        
             updateReference(new_next_pair, curNode);
         }
-        curNode = curNode->nextOcurr;
-    } while (curNode != nullptr);
+        curNode = nextOca;
+    } while (nextOca != nullptr);
 }
 
 void Solucion2::updateReference(std::pair<int, int> pair, nodo* nodo) {
@@ -67,6 +74,8 @@ void Solucion2::updateReference(std::pair<int, int> pair, nodo* nodo) {
         references->insert(make_pair(pair, ref));
     } else {
         // existe
+        nodo->prevOcurr = itRef->second.last;
+        itRef->second.last->nextOcurr = nodo;
         itRef->second.last = nodo;
         itRef->second.heapIndex = maxHeap->getIndex(pair);
     }
@@ -76,14 +85,14 @@ void Solucion2::loadData() {
     auto it = list->begin(); 
     auto last = it.end();
     auto nodo = it.nodo();
-    last = last->prev->prev;    
+    last = last->prev->prev;
     
     while (nodo != last) {
-        auto nodo1 = nodo->next; 
-        auto pair = make_pair(nodo->n, nodo1->n);
+        auto next = nodo->next; 
+        auto pair = make_pair(nodo->n, next->n);
         maxHeap->insert(pair);
         updateReference(pair, nodo);
-        nodo = nodo1;
+        nodo = next;
     }   
 }
 

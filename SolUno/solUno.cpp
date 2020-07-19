@@ -35,8 +35,8 @@ vector<pair<int, pair<int, int>>>* solUno::Compress(LinkedList *l)
     int regla = 28;
     if(list->size() == 0)
     {
-        cout << "no hay elementos para comprimir."
-        "Ejecuta addSequence antes que iterCompress" << endl;
+        // cout << "no hay elementos para comprimir."
+        // "Ejecuta addSequence antes que iterCompress" << endl;
         return reglas;
     }
 
@@ -55,8 +55,8 @@ vector<pair<int, pair<int, int>>>* solUno::Compress(LinkedList *l)
         {return a.second < b.second;});
         pair<int, int> replace = BEEG->first;
 
-        cout << "Max is: " << BEEG->first.first << " " << BEEG->first.second << ", " << BEEG->second << endl;
-        cout << "Tenemos que reemplasar el par: " << replace.first << " " << replace.second<< endl;
+        // cout << "Max is: " << BEEG->first.first << " " << BEEG->first.second << ", " << BEEG->second << endl;
+        // cout << "Tenemos que reemplasar el par: " << replace.first << " " << replace.second<< endl;
 
         if(BEEG->second == 1)
         {
@@ -87,8 +87,8 @@ map<pair<int,int>, int>* solUno::fillMap()
     map<pair<int,int>, int> *m = new map<pair<int,int>, int>();
     if(list->size() == 0)
     {
-        cout << "no hay elementos para comprimir."
-        "Ejecuta addSequence antes que iterCompress" << endl;
+        // cout << "no hay elementos para comprimir."
+        // "Ejecuta addSequence antes que iterCompress" << endl;
         delete m;
         return m;
     }
@@ -115,11 +115,11 @@ map<pair<int,int>, int>* solUno::fillMap()
     }
     auto itMap2 = m->begin();
 
-    while(itMap2 != m->end())
-    {
-        cout << itMap2->first.first << " " << itMap2->first.second << ", " << itMap2->second << endl;
-        itMap2++;
-    }
+    // while(itMap2 != m->end())
+    // {
+    //     cout << itMap2->first.first << " " << itMap2->first.second << ", " << itMap2->second << endl;
+    //     itMap2++;
+    // }
 
     return m;
 }

@@ -9,13 +9,15 @@ int main()
     controller *c = new controller();
 
     c->addSequence(100);
-    Solucion2* sol2 = new Solucion2(c->listU);
-    
-    sol2->compress();
-    c->sUno();
+    cout << "Lista Original" << endl;
     c->printListD();
-    c->printListU();
+    cout << "Solucion 2" << endl;
+    Solucion2* sol2 = new Solucion2(c->listD);    
+    sol2->compress();
     sol2->printCompress();
+    cout << "Solucion 1" << endl;    
+    c->sUno();
+    c->printListU();
 
 
     // while (it+1 < vec->end()) {
@@ -68,7 +70,7 @@ int main()
     // return 0;
     //delete c;
     //delete sol2;
-    delete c;
+    // delete c;
     delete sol2;
     return 0;
 }

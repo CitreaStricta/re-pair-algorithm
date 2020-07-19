@@ -105,13 +105,13 @@ void MaxHeap::shiftUp(int index) {
 
 void MaxHeap::updateFrequency(std::pair<int, int> pair, int change) {
     /// buscar
-    int index = getIndex(pair);
+    int index = getIndex(pair); // o(log n)
     if (index == -1)
         return;
 
     vect->at(index).first += change;
     if (vect->at(index).first <= 0) {
-        delete_pair(pair);
+        delete_pair(pair); // o(log n)
     }
     else if (change < 0) {
         shiftDown(index);
