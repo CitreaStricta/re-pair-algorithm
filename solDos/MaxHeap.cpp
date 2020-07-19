@@ -16,6 +16,12 @@ void MaxHeap::Compress(LinkedList *l)
     fillHeapAndMap();
     printHeap();
     printIndexes();
+    /**
+     * HASTA AQUI, EL MAP, EL HEAP Y LOS PUNTEROS PREVOCURR Y NEXTOCURR DE LOS NODOS
+     * DE LA LL ESTAN TODOS BIEN. AHORA INICIA EL PROCESO DE COMPRESION REAL
+    */
+   
+
 
     return;
 }
@@ -105,11 +111,13 @@ void MaxHeap::shiftDown(int index) {
 
 void MaxHeap::updatePtrs(nodo* nPtr, map<pair<int, int>, str>::iterator index)
 {
-    // la anterior ocurrencia del par
-    nPtr->prevOcurr = index->second.first;
-    // la siguiente ocurrencia del penultimo par
+    // le entrego al par actual un puntero a su ocurrencia anterior
+    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
+    // la str del par en el map)
+    nPtr->prevOcurr = index->second.last;
+    // al penultimo par le entrego su siguiente ocurrencia
     nPtr->prevOcurr->nextOcurr = nPtr;
-    // la ultima ocurrencia del par (el guardado en la str del map)
+    // la ultima ocurrencia del par termina siendo guardada en la str del par en el map
     index->second.last = nPtr;
 }
 

@@ -7,7 +7,7 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(200);
+    c->addSequence(28);
     c->printListD();
     c->sDos();
 
