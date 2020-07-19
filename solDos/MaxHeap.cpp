@@ -2,7 +2,7 @@
 
 MaxHeap::MaxHeap() {
     vect = new vector<pair<int, pair<int, int>>>();
-    posiciones = new map<pair<int, int>, int>();
+    posiciones = new map<pair<int, int>, str>();
 }
 
 MaxHeap::~MaxHeap() {
@@ -10,27 +10,50 @@ MaxHeap::~MaxHeap() {
     delete posiciones;
 }
 
-int MaxHeap::getIndex(std::pair<int, int> pair) {
+void MaxHeap::Compress(LinkedList *l)
+{
+    list = l;
+    fillHeap();
+
+    return;
+}
+
+void MaxHeap::fillHeap()
+{
+    //////////iteracion en la linked list//////////
+    // creo un puntero nodo que apunta al 1er nodo de la lista
+    Iterator it = list->begin();
+    // creo un pair auxiliar para manejar los valores
+    pair<int, int> pAux;
+    // cuando la tail de la LL se alcance entonces no quedaran mas
+    // valores en la LL por los cuales iterar
+    while(it.nodo()->next != it.end())
+    {
+        // se le inserta el nuevo (o repetido) par al heap,
+        // junto a un puntero al 1er elemento del par
+        pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
+
+        insert(pAux, it.nodo());
+        it++;
+    }
+}
+
+map<pair<int, int>, str>::iterator MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
-    int index = 0;
-    if (it != posiciones->end())
-        index = it->second;
-    else
-        index = -1;
-    return index;
+    return it;
 }
 
 void MaxHeap::updateIndex(std::pair<int, int> pair, int newIndex) {
     auto it = posiciones->find(pair);
     if (it != posiciones->end())
-        it->second = newIndex;
+        it->second.heapIndex = newIndex;
 }
 
 void MaxHeap::swap(int i1, int i2) {
     auto aux = vect->at(i1);
     vect->at(i1) = vect->at(i2);
     vect->at(i2) = aux;
-    auto swappedPair = aux.second;    
+    auto swappedPair = aux.second;
     updateIndex(swappedPair, i2);
     swappedPair = vect->at(i1).second;
     updateIndex(swappedPair, i1);
@@ -78,15 +101,38 @@ void MaxHeap::shiftDown(int index) {
     }
 }
 
-void MaxHeap::insert(std::pair<int, int> pair) {
-    int index = getIndex(pair);
-    if (index == -1) {
+void MaxHeap::updatePtrs(nodo* nPtr, map<pair<int, int>, str>::iterator index)
+{
+    // la anterior ocurrencia del par
+    nPtr->prevOcurr = index->second.first;
+    // la siguiente ocurrencia del penultimo par
+    nPtr->prevOcurr->nextOcurr = nPtr;
+    // la ultima ocurrencia del par (el guardado en la str del map)
+    index->second.last = nPtr;
+}
+
+void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
+    // llamo a un iterador de map para decirme si el par esta, o no
+    auto index = getIndex(pair);
+    // si el par no es encontrado, entonces hay que agregarlo
+    if (index == posiciones->end()) {
         auto entry = make_pair(1, pair);
         vect->push_back(entry);
-        posiciones->insert(make_pair(pair, vect->size() - 1));
+
+        // creo la estructura a incertar en el map junto al par "pair"
+        str str_aux;
+        str_aux.first = str_aux.last = nPtr;
+        str_aux.heapIndex = vect->size() - 1;
+
+        posiciones->insert(make_pair(pair, str_aux));
         shiftUp(vect->size() - 1);
     } else {
-        updateFrequency(pair, 1);
+        // actualizo:
+        // los punteros de nextOcurr/prevOcurr de los nodos de la LL con par repetido
+        // y el puntero de la ultima ocurrencia de este par
+        updatePtrs(nPtr, index);
+        // y la frecuencia del par
+        updateFrequency(index, 1);
     }
 }
 
@@ -103,35 +149,33 @@ void MaxHeap::shiftUp(int index) {
     }
 }
 
-void MaxHeap::updateFrequency(std::pair<int, int> pair, int change) {
+void MaxHeap::updateFrequency(map<pair<int, int>, str>::iterator index, int change) {
     /// buscar
-    int index = getIndex(pair);
-    if (index == -1)
+    if (index == posiciones->end())
         return;
 
-    vect->at(index).first += change;
-    if (vect->at(index).first <= 0) {
-        delete_pair(pair);
+    vect->at(index->second.heapIndex).first += change;
+    if (vect->at(index->second.heapIndex).first <= 0) {
+        delete_pair(index);
     }
     else if (change < 0) {
-        shiftDown(index);
+        shiftDown(index->second.heapIndex);
     } else {
-        shiftUp(index);
+        shiftUp(index->second.heapIndex);
     }
 }
 
-void MaxHeap::delete_pair(std::pair<int, int> pair) {
-    int index = getIndex(pair);
-    if (index == -1)
+void MaxHeap::delete_pair(map<pair<int, int>, str>::iterator index) {
+    if (index == posiciones->end())
         return;
-    if (index == vect->size() - 1) {
-        vect->pop_back();        
-    } else {
-        swap(index, vect->size() - 1);
+    if (index->second.heapIndex == vect->size() - 1) {
         vect->pop_back();
-        shiftDown(index);
+    } else {
+        swap(index->second.heapIndex, vect->size() - 1);
+        vect->pop_back();
+        shiftDown(index->second.heapIndex);
     }
-    posiciones->erase(pair);    
+    posiciones->erase(index->first);
 }
 
 void MaxHeap::printHeap() {
@@ -148,7 +192,7 @@ void MaxHeap::printIndexes() {
     cout << "indexes = [ ";
     auto it_map = posiciones->begin();
     while(it_map != posiciones->end()) {
-        cout << "({" << it_map->first.first << ", " << it_map->first.second << "}, " << it_map->second << "), ";
+        cout << "({" << it_map->first.first << ", " << it_map->first.second << "}, " << it_map->second.heapIndex << "), ";
         it_map++;
     }
     cout << "]" << endl;

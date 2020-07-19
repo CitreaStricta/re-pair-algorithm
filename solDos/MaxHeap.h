@@ -1,10 +1,13 @@
 #ifndef MH_H
 #define MH_H
 
+#include "../LinkedList/LinkedList.h"
 #include <iostream>
 #include <utility>
 #include <vector>
 #include <map>
+#include "str.h"
+// map<pair<int, int>, str>::iterator
 
 using namespace std;
 
@@ -14,21 +17,25 @@ private:
     int parent(int index);
     int left(int index);
     int right(int index);
-    int getIndex(std::pair<int, int> pair);
+    map<pair<int, int>, str>::iterator getIndex(std::pair<int, int> pair);
+    void updatePtrs(nodo*, map<pair<int, int>, str>::iterator);
     void updateIndex(std::pair<int, int> pair, int newIndex);
-    std::map<pair<int, int>, int>* posiciones;
+    std::map<pair<int, int>, str>* posiciones;
     vector<pair<int, pair<int, int>>>* vect;
+    LinkedList *list;
 public:
     MaxHeap();
     ~MaxHeap();
-    std::pair<int, std::pair<int, int>> getMax(); 
+    void Compress(LinkedList *l);
+    void fillHeap();
+    std::pair<int, std::pair<int, int>> getMax();
     std::pair<int, std::pair<int, int>> extractMax();
     void swap(int i1, int i2);
-    void insert(std::pair<int, int> pair);
+    void insert(std::pair<int, int> pair, nodo*);
     void shiftUp(int index);
-    void updateFrequency(std::pair<int, int> pair, int change); 
+    void updateFrequency(map<pair<int, int>, str>::iterator iterMap, int change); 
     void shiftDown(int index);
-    void delete_pair(std::pair<int, int> pair); 
+    void delete_pair(map<pair<int, int>, str>::iterator iterMap); 
     void printHeap();
     void printIndexes();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator begin();
