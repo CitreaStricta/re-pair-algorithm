@@ -2,7 +2,7 @@
 
 MaxHeap::MaxHeap() {
     vect = new vector<pair<int, pair<int, int>>>();
-    posiciones = new map<pair<int, int>, int>();
+    posiciones = new map<pair<int, int>, long>();
 }
 
 MaxHeap::~MaxHeap() {
@@ -10,9 +10,9 @@ MaxHeap::~MaxHeap() {
     delete posiciones;
 }
 
-int MaxHeap::getIndex(std::pair<int, int> pair) {
+long MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
-    int index = 0;
+    long index = 0;
     if (it != posiciones->end())
         index = it->second;
     else
@@ -30,7 +30,7 @@ void MaxHeap::swap(int i1, int i2) {
     auto aux = vect->at(i1);
     vect->at(i1) = vect->at(i2);
     vect->at(i2) = aux;
-    auto swappedPair = aux.second;    
+    auto swappedPair = aux.second;
     updateIndex(swappedPair, i2);
     swappedPair = vect->at(i1).second;
     updateIndex(swappedPair, i1);

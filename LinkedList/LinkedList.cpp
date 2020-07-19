@@ -128,7 +128,7 @@ void LinkedList::insertAt(int n, nodo* k)
 void LinkedList::popAt(nodo *k)
 {   
     // creo mi nodo auxiliar y lo apunto al nodo a popear
-    nodo *pop_Aux = k;
+    nodo *pop_Aux = k;    
     if (pop_Aux->nextOcurr != nullptr)
         pop_Aux->nextOcurr->prevOcurr = nullptr;
     if (pop_Aux->prevOcurr != nullptr)

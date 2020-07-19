@@ -4,7 +4,7 @@
 struct reference {
     nodo *first;
     nodo *last;
-    int heapIndex;
+    long heapIndex;
 };
 
 class Solucion2

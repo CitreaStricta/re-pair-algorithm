@@ -15,6 +15,7 @@ Solucion2::~Solucion2() {
 void Solucion2::compress() {
     loadData();    
     auto max = maxHeap->extractMax();
+    long count = 0;
     while (max.first > 1) {
         auto ref = references->at(max.second);
         auto nodo = ref.first;
@@ -26,25 +27,22 @@ void Solucion2::compress() {
 
 void Solucion2::compressPair(nodo* curNode, int replacement) {    
     references->erase(make_pair(curNode->n, curNode->next->n)); 
-    nodo* nextOca;
-    do {
-        if (curNode->nextOcurr == curNode->next)
-            nextOca = curNode->nextOcurr->nextOcurr;
-        else
-            nextOca = curNode->nextOcurr;
+    do {        
+        curNode->prevOcurr = nullptr;        
         // borrado y update
-        if (curNode->prev != nullptr) {
+        if (curNode->prev->n > -1) {
             auto del_prev_pair = make_pair(curNode->prev->n, curNode->n);
             maxHeap->updateFrequency(del_prev_pair, -1);
             deleteFromMap(del_prev_pair, curNode->prev);
         }
-        if (curNode->next != nullptr && curNode->next->next != nullptr) {
+        if (curNode->next->n > -1 && curNode->next->next != nullptr) {
             auto del_next_pair = make_pair(curNode->next->n, curNode->next->next->n);
             maxHeap->updateFrequency(del_next_pair, -1);        
             deleteFromMap(del_next_pair, curNode->next);
         }
+        nodo* deletethis = curNode->next;
         nodo* nodeToDelete = curNode->next;        
-        list->popAt(nodeToDelete);       
+        list->popAt(nodeToDelete);      
         // insertar nuevos pares
         curNode->n = replacement;
         if (curNode->prev != nullptr && curNode->prev->n != -2) {
@@ -52,15 +50,14 @@ void Solucion2::compressPair(nodo* curNode, int replacement) {
             maxHeap->insert(new_prev_pair);
             updateReference(new_prev_pair, curNode->prev);
         }
-        curNode->nextOcurr = nullptr;
-        curNode->prevOcurr = nullptr;
-        if (curNode->next != nullptr && curNode->next->next != nullptr) {            
+
+        if (curNode->next->n != -2) { // && curNode->next->next != nullptr && curNode->next->next->n != -2) {            
             auto new_next_pair = make_pair(curNode->n, curNode->next->n);
             maxHeap->insert(new_next_pair);        
             updateReference(new_next_pair, curNode);
         }
-        curNode = nextOca;
-    } while (nextOca != nullptr);
+        curNode = curNode->nextOcurr;        
+    } while (curNode != nullptr);
 }
 
 void Solucion2::updateReference(std::pair<int, int> pair, nodo* nodo) {

@@ -1,6 +1,7 @@
 #include "controller/controller.h"
 #include <iostream>
 #include "Solucion2/Solucion2.h"
+#include "helpers/Timer.h"
 // #include <iterator>
 
 using namespace std;
@@ -8,17 +9,22 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(100);
+    c->addSequence(1000);
     cout << "Lista Original" << endl;
-    c->printListD();
+    //c->printListD();
     cout << "Solucion 2" << endl;
-    Solucion2* sol2 = new Solucion2(c->listD);    
-    sol2->compress();
-    sol2->printCompress();
-    cout << "Solucion 1" << endl;    
-    c->sUno();
-    c->printListU();
-
+    Solucion2* sol2 = new Solucion2(c->listD);   
+    {
+        Timer timer;
+        sol2->compress();
+    }
+    //sol2->printCompress();
+    // cout << "Solucion 1" << endl;
+    // {
+    //     Timer timer;
+    //     c->sUno();
+    // }
+    //c->printListU();
 
     // while (it+1 < vec->end()) {
     //     auto pair = make_pair(*it, *(std::next(it, 1)));
@@ -71,6 +77,6 @@ int main()
     //delete c;
     //delete sol2;
     // delete c;
-    delete sol2;
+    //delete sol2;
     return 0;
 }
