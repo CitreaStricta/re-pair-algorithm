@@ -4,7 +4,6 @@ Solucion2::Solucion2(LinkedList* linkedList) {
     list = linkedList;
     maxHeap = new MaxHeap();
     references = new std::map<pair<int, int>, reference>();
-    symbols.push_back(27);
 }
 
 Solucion2::~Solucion2() {

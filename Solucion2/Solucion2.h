@@ -11,7 +11,6 @@ class Solucion2
 {
 private:
     int replacement = 28;
-    std::vector<int> symbols; 
     std::map<std::pair<int, int>, reference>* references;
     MaxHeap* maxHeap;
     LinkedList* list;

@@ -64,5 +64,7 @@ int main()
     // return 0;
     //delete c;
     //delete sol2;
+    delete c;
+    delete sol2;
     return 0;
 }
