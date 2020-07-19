@@ -62,9 +62,9 @@ void controller::sDos()
         return;
     }
 
-    solDos *sDos = new solDos();
-    sDos->Compress(listD);
-    delete sDos;
+    MaxHeap *h = new MaxHeap();
+    h->Compress(listD);
+    delete h;
 }
 
 // hace lo que crees que hace
@@ -84,12 +84,12 @@ void controller::printListU()
 void controller::printListD()
 {
     respUno;
-    int aux = listU->at(0);
+    int aux = listD->at(0);
     int i = 1;
     while(aux > 0)
     {
         cout << aux << " ";
-        aux = listU->at(i++);
+        aux = listD->at(i++);
     }
     cout << endl;
 }

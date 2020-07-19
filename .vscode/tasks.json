@@ -13,7 +13,6 @@
                 "${fileDirname}/LinkedList/iterator.cpp",
                 "${fileDirname}/LinkedList/LinkedList.cpp",
                 "${fileDirname}/controller/controller.cpp",
-                "${fileDirname}/solDos/solDos.cpp",
                 "${fileDirname}/solDos/MaxHeap.cpp",
                 "-o",
                 "${fileDirname}/main"

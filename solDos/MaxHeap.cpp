@@ -13,12 +13,14 @@ MaxHeap::~MaxHeap() {
 void MaxHeap::Compress(LinkedList *l)
 {
     list = l;
-    fillHeap();
+    fillHeapAndMap();
+    printHeap();
+    printIndexes();
 
     return;
 }
 
-void MaxHeap::fillHeap()
+void MaxHeap::fillHeapAndMap()
 {
     //////////iteracion en la linked list//////////
     // creo un puntero nodo que apunta al 1er nodo de la lista

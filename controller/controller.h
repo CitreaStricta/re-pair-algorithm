@@ -1,5 +1,5 @@
 #include "../LinkedList/LinkedList.h"
-#include "../solDos/solDos.h"
+#include "../solDos/MaxHeap.h"
 #include <iostream>
 #include <utility>
 #include <vector>

@@ -27,7 +27,7 @@ public:
     MaxHeap();
     ~MaxHeap();
     void Compress(LinkedList *l);
-    void fillHeap();
+    void fillHeapAndMap();
     std::pair<int, std::pair<int, int>> getMax();
     std::pair<int, std::pair<int, int>> extractMax();
     void swap(int i1, int i2);

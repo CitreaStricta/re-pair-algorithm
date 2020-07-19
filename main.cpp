@@ -7,7 +7,8 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(50);
+    c->addSequence(200);
+    c->printListD();
     c->sDos();
 
     // while (it+1 < vec->end()) {
