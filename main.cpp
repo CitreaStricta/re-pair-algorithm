@@ -9,7 +9,7 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(1000);
+    c->addSequence(10000);
     cout << "Lista Original" << endl;
     //c->printListD();
     cout << "Solucion 2" << endl;
@@ -18,7 +18,7 @@ int main()
         Timer timer;
         sol2->compress();
     }
-    //sol2->printCompress();
+    sol2->printCompress();
     // cout << "Solucion 1" << endl;
     // {
     //     Timer timer;
@@ -76,7 +76,7 @@ int main()
     // return 0;
     //delete c;
     //delete sol2;
-    // delete c;
-    //delete sol2;
+    delete c;
+    delete sol2;
     return 0;
 }

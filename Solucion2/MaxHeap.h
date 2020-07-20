@@ -14,20 +14,24 @@ private:
     int left(int index);
     int right(int index);
     void updateIndex(std::pair<int, int> pair, int newIndex);
-    std::map<pair<int, int>, long>* posiciones;
+    std::map<pair<int, int>, int*>* posiciones;
     vector<pair<int, pair<int, int>>>* vect;
 public:
     MaxHeap();
     ~MaxHeap();
     std::pair<int, std::pair<int, int>> getMax(); 
     std::pair<int, std::pair<int, int>> extractMax();
-    long getIndex(std::pair<int, int> pair);
+    int getIndex(std::pair<int, int> pair);
+    int* getIndexPtr(std::pair<int, int> pair);
     void swap(int i1, int i2);
     void insert(std::pair<int, int> pair);
+    void insert2(std::pair<int, int> pair);
     void shiftUp(int index);
     void updateFrequency(std::pair<int, int> pair, int change); 
+    void updateFrequency(std::pair<int, int> pair, int index, int change);
     void shiftDown(int index);
     void delete_pair(std::pair<int, int> pair); 
+    void delete_pair(pair<int, int> pair, int index);
     void printHeap();
     void printIndexes();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator begin();

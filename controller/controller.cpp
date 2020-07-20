@@ -4,7 +4,7 @@ using namespace std;
 
 controller::controller()
 {
-    srand(time(NULL));
+    //srand(time(NULL));
     respUno = respDos = nullptr;
     listU = listD = nullptr;
 }

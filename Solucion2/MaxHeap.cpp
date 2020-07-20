@@ -2,7 +2,7 @@
 
 MaxHeap::MaxHeap() {
     vect = new vector<pair<int, pair<int, int>>>();
-    posiciones = new map<pair<int, int>, long>();
+    posiciones = new map<pair<int, int>, int*>();
 }
 
 MaxHeap::~MaxHeap() {
@@ -10,20 +10,30 @@ MaxHeap::~MaxHeap() {
     delete posiciones;
 }
 
-long MaxHeap::getIndex(std::pair<int, int> pair) {
+int MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
-    long index = 0;
+    int index = 0;
+    if (it != posiciones->end())
+        index = *(it->second);
+    else
+        index = -1;
+    return index;
+}
+
+int* MaxHeap::getIndexPtr(std::pair<int, int> pair) {
+    auto it = posiciones->find(pair);
+    int* index;
     if (it != posiciones->end())
         index = it->second;
     else
-        index = -1;
+        index = nullptr;
     return index;
 }
 
 void MaxHeap::updateIndex(std::pair<int, int> pair, int newIndex) {
     auto it = posiciones->find(pair);
     if (it != posiciones->end())
-        it->second = newIndex;
+        *(it->second) = newIndex;
 }
 
 void MaxHeap::swap(int i1, int i2) {
@@ -65,7 +75,7 @@ void MaxHeap::shiftDown(int index) {
         if (n < l) // izquierda es mayor que parent
             if (l > r) {
                 int li = left(index);
-                swap(index, li);
+                swap(index,li);
                 shiftDown(li);
                 return;
             }
@@ -83,8 +93,11 @@ void MaxHeap::insert(std::pair<int, int> pair) {
     if (index == -1) {
         auto entry = make_pair(1, pair);
         vect->push_back(entry);
-        posiciones->insert(make_pair(pair, vect->size() - 1));
+        int* indexPtr = new int;
+        *indexPtr = vect->size() - 1;
+        posiciones->insert(make_pair(pair, indexPtr));
         shiftUp(vect->size() - 1);
+        indexPtr = nullptr;
     } else {
         updateFrequency(pair, 1);
     }
@@ -110,6 +123,7 @@ void MaxHeap::updateFrequency(std::pair<int, int> pair, int change) {
         return;
 
     vect->at(index).first += change;
+    
     if (vect->at(index).first <= 0) {
         delete_pair(pair); // o(log n)
     }
@@ -120,8 +134,41 @@ void MaxHeap::updateFrequency(std::pair<int, int> pair, int change) {
     }
 }
 
+void MaxHeap::updateFrequency(std::pair<int, int> pair, int index, int change) {
+    /// buscar    
+    if (index == -1)
+        return;
+    vect->at(index).first += change;
+    if (vect->at(index).first <= 0) {
+        delete_pair(pair); // o(log n)
+    }
+    else if (change < 0) {
+        shiftDown(index);
+    } else {
+        shiftUp(index);
+    }
+}
+
+
 void MaxHeap::delete_pair(std::pair<int, int> pair) {
     int index = getIndex(pair);
+    if (index == -1)
+        return;
+    if (index == vect->size() - 1) {
+        vect->pop_back();        
+    } else {
+        swap(index, vect->size() - 1);
+        vect->pop_back();
+        shiftDown(index);
+    }
+    auto it = posiciones->find(pair);
+    if (it != posiciones->end()) {
+        delete it->second;
+        posiciones->erase(it);
+    }       
+}
+
+void MaxHeap::delete_pair(pair<int, int> pair, int index) {    
     if (index == -1)
         return;
     if (index == vect->size() - 1) {
@@ -169,7 +216,8 @@ int MaxHeap::parent(int index){
 }
 
 int MaxHeap::left(int index){
-    return (index*2) + 1;
+    return (index*2) + 1;        
+
 }
 
 int MaxHeap::right(int index){

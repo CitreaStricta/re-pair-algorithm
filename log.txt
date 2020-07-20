@@ -1,0 +1,405 @@
+==12445== Memcheck, a memory error detector
+==12445== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12445== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==12445== Command: ./main --leak-check=full --main-stacksize=16000000
+==12445== 
+Lista Original
+Solucion 2
+count=1, freq=26, pair={27, 9}, replacement = 28
+count=2, freq=24, pair={16, 10}, replacement = 29
+count=3, freq=24, pair={6, 20}, replacement = 30
+count=4, freq=24, pair={17, 12}, replacement = 31
+count=5, freq=23, pair={20, 22}, replacement = 32
+count=6, freq=23, pair={25, 3}, replacement = 33
+count=7, freq=23, pair={26, 5}, replacement = 34
+count=8, freq=23, pair={21, 27}, replacement = 35
+count=9, freq=23, pair={6, 24}, replacement = 36
+count=10, freq=22, pair={4, 7}, replacement = 37
+count=11, freq=22, pair={23, 22}, replacement = 38
+count=12, freq=22, pair={12, 8}, replacement = 39
+count=13, freq=22, pair={4, 17}, replacement = 40
+count=14, freq=22, pair={9, 4}, replacement = 41
+count=15, freq=21, pair={15, 20}, replacement = 42
+count=16, freq=21, pair={14, 8}, replacement = 43
+count=17, freq=21, pair={22, 12}, replacement = 44
+count=18, freq=21, pair={3, 3}, replacement = 45
+count=19, freq=21, pair={11, 14}, replacement = 46
+count=20, freq=20, pair={19, 26}, replacement = 47
+count=21, freq=20, pair={15, 12}, replacement = 48
+count=22, freq=20, pair={1, 20}, replacement = 49
+count=23, freq=20, pair={13, 24}, replacement = 50
+count=24, freq=20, pair={27, 2}, replacement = 51
+count=25, freq=19, pair={4, 3}, replacement = 52
+count=26, freq=19, pair={26, 7}, replacement = 53
+count=27, freq=19, pair={1, 25}, replacement = 54
+count=28, freq=19, pair={22, 24}, replacement = 55
+count=29, freq=19, pair={21, 20}, replacement = 56
+count=30, freq=19, pair={15, 11}, replacement = 57
+count=31, freq=19, pair={5, 5}, replacement = 58
+count=32, freq=19, pair={25, 24}, replacement = 59
+count=33, freq=19, pair={9, 2}, replacement = 60
+count=34, freq=19, pair={23, 3}, replacement = 61
+count=35, freq=19, pair={1, 26}, replacement = 62
+count=36, freq=19, pair={8, 12}, replacement = 63
+count=37, freq=19, pair={19, 10}, replacement = 64
+count=38, freq=19, pair={7, 20}, replacement = 65
+count=39, freq=18, pair={19, 1}, replacement = 66
+count=40, freq=18, pair={5, 3}, replacement = 67
+count=41, freq=18, pair={12, 17}, replacement = 68
+count=42, freq=18, pair={26, 2}, replacement = 69
+count=43, freq=18, pair={15, 24}, replacement = 70
+count=44, freq=18, pair={16, 23}, replacement = 71
+count=45, freq=18, pair={9, 9}, replacement = 72
+count=46, freq=17, pair={19, 24}, replacement = 73
+==12445== Invalid write of size 8
+==12445==    at 0x10F5FC: fixOccPtr(nodo*) (nodo.h:17)
+==12445==    by 0x1102DB: Solucion2::deleteFromMap(std::pair<int, int>, nodo*) (Solucion2.cpp:179)
+==12445==    by 0x10FDE6: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:104)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4df4b88 is 24 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid write of size 8
+==12445==    at 0x10AD28: fixOccPtr(nodo*) (nodo.h:17)
+==12445==    by 0x10B129: LinkedList::popAt(nodo*) (LinkedList.cpp:132)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4df4b88 is 24 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+count=47, freq=17, pair={1, 10}, replacement = 74
+count=48, freq=17, pair={7, 10}, replacement = 75
+count=49, freq=17, pair={18, 4}, replacement = 76
+count=50, freq=17, pair={8, 24}, replacement = 77
+count=51, freq=16, pair={19, 7}, replacement = 78
+count=52, freq=16, pair={9, 7}, replacement = 79
+count=53, freq=16, pair={19, 13}, replacement = 80
+count=54, freq=16, pair={13, 10}, replacement = 81
+count=55, freq=16, pair={6, 17}, replacement = 82
+count=56, freq=16, pair={27, 19}, replacement = 83
+count=57, freq=16, pair={2, 27}, replacement = 84
+count=58, freq=16, pair={6, 14}, replacement = 85
+count=59, freq=16, pair={5, 17}, replacement = 86
+==12445== Invalid write of size 8
+==12445==    at 0x10F629: fixOccPtr(nodo*) (nodo.h:23)
+==12445==    by 0x1102DB: Solucion2::deleteFromMap(std::pair<int, int>, nodo*) (Solucion2.cpp:179)
+==12445==    by 0x10FDE6: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:104)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4dd7848 is 24 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid write of size 8
+==12445==    at 0x10AD55: fixOccPtr(nodo*) (nodo.h:23)
+==12445==    by 0x10B129: LinkedList::popAt(nodo*) (LinkedList.cpp:132)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4dd7848 is 24 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+count=60, freq=16, pair={13, 1}, replacement = 87
+count=61, freq=16, pair={25, 15}, replacement = 88
+count=62, freq=16, pair={21, 26}, replacement = 89
+count=63, freq=16, pair={23, 14}, replacement = 90
+count=64, freq=16, pair={2, 24}, replacement = 91
+count=65, freq=15, pair={15, 22}, replacement = 92
+count=66, freq=15, pair={25, 23}, replacement = 93
+==12445== Invalid write of size 8
+==12445==    at 0x10F5E8: fixOccPtr(nodo*) (nodo.h:16)
+==12445==    by 0x1102DB: Solucion2::deleteFromMap(std::pair<int, int>, nodo*) (Solucion2.cpp:179)
+==12445==    by 0x10FDE6: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:104)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fe4850 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid write of size 8
+==12445==    at 0x10AD14: fixOccPtr(nodo*) (nodo.h:16)
+==12445==    by 0x10B129: LinkedList::popAt(nodo*) (LinkedList.cpp:132)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fe4850 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+count=67, freq=15, pair={18, 10}, replacement = 94
+count=68, freq=15, pair={9, 17}, replacement = 95
+count=69, freq=15, pair={14, 24}, replacement = 96
+count=70, freq=15, pair={21, 22}, replacement = 97
+count=71, freq=15, pair={21, 11}, replacement = 98
+count=72, freq=15, pair={19, 11}, replacement = 99
+count=73, freq=15, pair={26, 26}, replacement = 100
+count=74, freq=15, pair={18, 5}, replacement = 101
+count=75, freq=15, pair={25, 16}, replacement = 102
+count=76, freq=15, pair={25, 20}, replacement = 103
+count=77, freq=15, pair={25, 11}, replacement = 104
+count=78, freq=15, pair={9, 5}, replacement = 105
+count=79, freq=15, pair={7, 17}, replacement = 106
+count=80, freq=15, pair={27, 13}, replacement = 107
+count=81, freq=15, pair={13, 5}, replacement = 108
+count=82, freq=14, pair={23, 16}, replacement = 109
+==12445== Invalid write of size 8
+==12445==    at 0x10F5E8: fixOccPtr(nodo*) (nodo.h:16)
+==12445==    by 0x1102DB: Solucion2::deleteFromMap(std::pair<int, int>, nodo*) (Solucion2.cpp:179)
+==12445==    by 0x10FD43: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:96)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fafdb0 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+count=83, freq=14, pair={25, 5}, replacement = 110
+count=84, freq=14, pair={8, 6}, replacement = 111
+count=85, freq=14, pair={9, 3}, replacement = 112
+count=86, freq=14, pair={21, 1}, replacement = 113
+count=87, freq=14, pair={6, 16}, replacement = 114
+count=88, freq=14, pair={25, 18}, replacement = 115
+count=89, freq=14, pair={2, 3}, replacement = 116
+count=90, freq=14, pair={15, 17}, replacement = 117
+count=91, freq=14, pair={11, 16}, replacement = 118
+count=92, freq=14, pair={18, 8}, replacement = 119
+count=93, freq=14, pair={18, 17}, replacement = 120
+count=94, freq=14, pair={9, 16}, replacement = 121
+count=95, freq=14, pair={13, 20}, replacement = 122
+count=96, freq=14, pair={18, 16}, replacement = 123
+count=97, freq=14, pair={2, 10}, replacement = 124
+count=98, freq=14, pair={18, 11}, replacement = 125
+count=99, freq=13, pair={9, 8}, replacement = 126
+count=100, freq=13, pair={21, 25}, replacement = 127
+count=101, freq=13, pair={16, 24}, replacement = 128
+count=102, freq=13, pair={20, 3}, replacement = 129
+count=103, freq=13, pair={13, 16}, replacement = 130
+count=104, freq=13, pair={22, 3}, replacement = 131
+count=105, freq=13, pair={12, 26}, replacement = 132
+count=106, freq=13, pair={25, 4}, replacement = 133
+count=107, freq=13, pair={21, 4}, replacement = 134
+count=108, freq=13, pair={9, 27}, replacement = 135
+count=109, freq=13, pair={27, 16}, replacement = 136
+count=110, freq=13, pair={5, 8}, replacement = 137
+count=111, freq=13, pair={9, 22}, replacement = 138
+count=112, freq=13, pair={19, 3}, replacement = 139
+count=113, freq=13, pair={4, 23}, replacement = 140
+count=114, freq=12, pair={19, 16}, replacement = 141
+count=115, freq=12, pair={25, 10}, replacement = 142
+count=116, freq=12, pair={7, 3}, replacement = 143
+count=117, freq=12, pair={19, 27}, replacement = 144
+count=118, freq=12, pair={13, 26}, replacement = 145
+count=119, freq=12, pair={11, 11}, replacement = 146
+count=120, freq=12, pair={23, 12}, replacement = 147
+count=121, freq=12, pair={2, 11}, replacement = 148
+count=122, freq=12, pair={18, 22}, replacement = 149
+count=123, freq=12, pair={12, 7}, replacement = 150
+count=124, freq=12, pair={15, 27}, replacement = 151
+count=125, freq=12, pair={21, 3}, replacement = 152
+==12445== Invalid write of size 8
+==12445==    at 0x10F60A: fixOccPtr(nodo*) (nodo.h:19)
+==12445==    by 0x1102DB: Solucion2::deleteFromMap(std::pair<int, int>, nodo*) (Solucion2.cpp:179)
+==12445==    by 0x10FDE6: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:104)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4ea5250 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid write of size 8
+==12445==    at 0x10AD36: fixOccPtr(nodo*) (nodo.h:19)
+==12445==    by 0x10B129: LinkedList::popAt(nodo*) (LinkedList.cpp:132)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4ea5250 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+count=126, freq=12, pair={4, 1}, replacement = 153
+count=127, freq=12, pair={21, 10}, replacement = 154
+count=128, freq=12, pair={24, 8}, replacement = 155
+count=129, freq=12, pair={14, 2}, replacement = 156
+count=130, freq=12, pair={4, 13}, replacement = 157
+count=131, freq=12, pair={9, 10}, replacement = 158
+count=132, freq=12, pair={6, 27}, replacement = 159
+count=133, freq=12, pair={19, 8}, replacement = 160
+count=134, freq=12, pair={2, 5}, replacement = 161
+count=135, freq=12, pair={23, 20}, replacement = 162
+count=136, freq=11, pair={19, 20}, replacement = 163
+count=137, freq=11, pair={1, 15}, replacement = 164
+count=138, freq=11, pair={19, 22}, replacement = 165
+count=139, freq=11, pair={13, 27}, replacement = 166
+count=140, freq=11, pair={25, 12}, replacement = 167
+count=141, freq=11, pair={25, 8}, replacement = 168
+count=142, freq=11, pair={11, 3}, replacement = 169
+count=143, freq=11, pair={7, 21}, replacement = 170
+count=144, freq=11, pair={19, 14}, replacement = 171
+count=145, freq=11, pair={15, 3}, replacement = 172
+count=146, freq=11, pair={7, 11}, replacement = 173
+count=147, freq=11, pair={26, 14}, replacement = 174
+count=148, freq=11, pair={2, 13}, replacement = 175
+count=149, freq=11, pair={6, 2}, replacement = 176
+count=150, freq=11, pair={9, 14}, replacement = 177
+count=151, freq=10, pair={22, 26}, replacement = 178
+count=152, freq=10, pair={5, 22}, replacement = 179
+count=153, freq=10, pair={6, 12}, replacement = 180
+count=154, freq=10, pair={19, 12}, replacement = 181
+count=155, freq=10, pair={23, 9}, replacement = 182
+==12445== Invalid write of size 8
+==12445==    at 0x10F60A: fixOccPtr(nodo*) (nodo.h:19)
+==12445==    by 0x10FE2A: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:117)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fe4850 is 32 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid read of size 4
+==12445==    at 0x10FCC2: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:90)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fe4830 is 0 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid read of size 8
+==12445==    at 0x10FCCB: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:90)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x4fe4838 is 8 bytes inside a block of size 40 free'd
+==12445==    at 0x483C1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10B1B5: LinkedList::popAt(nodo*) (LinkedList.cpp:152)
+==12445==    by 0x10FE09: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:110)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Block was alloc'd at
+==12445==    at 0x483AE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12445==    by 0x10AFA6: LinkedList::insertAtTail(int) (LinkedList.cpp:62)
+==12445==    by 0x10B56A: controller::addSequence(int) (controller.cpp:40)
+==12445==    by 0x10A552: main (main.cpp:12)
+==12445== 
+==12445== Invalid read of size 4
+==12445==    at 0x10FCCF: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:90)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==12445== 
+==12445== 
+==12445== Process terminating with default action of signal 11 (SIGSEGV)
+==12445==  Access not within mapped region at address 0x0
+==12445==    at 0x10FCCF: Solucion2::compressPairMejora3(nodo*, int, int) (Solucion2.cpp:90)
+==12445==    by 0x10F941: Solucion2::compress() (Solucion2.cpp:31)
+==12445==    by 0x10A5DE: main (main.cpp:19)
+==12445==  If you believe this happened as a result of a stack
+==12445==  overflow in your program's main thread (unlikely but
+==12445==  possible), you can try to increase the size of the
+==12445==  main thread stack using the --main-stacksize= flag.
+==12445==  The main thread stack size used in this run was 8388608.
+==12445== 
+==12445== HEAP SUMMARY:
+==12445==     in use at exit: 1,218,216 bytes in 29,766 blocks
+==12445==   total heap usage: 33,560 allocs, 3,794 frees, 1,498,776 bytes allocated
+==12445== 
+==12445== LEAK SUMMARY:
+==12445==    definitely lost: 616 bytes in 154 blocks
+==12445==    indirectly lost: 0 bytes in 0 blocks
+==12445==      possibly lost: 0 bytes in 0 blocks
+==12445==    still reachable: 1,217,600 bytes in 29,612 blocks
+==12445==         suppressed: 0 bytes in 0 blocks
+==12445== Rerun with --leak-check=full to see details of leaked memory
+==12445== 
+==12445== For lists of detected and suppressed errors, rerun with: -s
+==12445== ERROR SUMMARY: 122 errors from 13 contexts (suppressed: 0 from 0)

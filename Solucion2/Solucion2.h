@@ -4,7 +4,7 @@
 struct reference {
     nodo *first;
     nodo *last;
-    long heapIndex;
+    int* heapIndex;
 };
 
 class Solucion2
@@ -15,9 +15,10 @@ private:
     MaxHeap* maxHeap;
     LinkedList* list;
     void loadData();
-    void compressPair(nodo* curNode, int replacement);
+    void compressPair(nodo* curNode, int index, int replacement);
     void deleteFromMap(std::pair<int, int> pair, nodo* nodo);
     void updateReference(std::pair<int, int> pair, nodo* nodo);
+    void compressPairMejora3(nodo* curNode, int index, int replacement);
 public:
     Solucion2(LinkedList* linkedList);
     ~Solucion2();
