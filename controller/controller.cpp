@@ -31,14 +31,15 @@ void controller::addSequence(int n)
     if(listD != nullptr) delete listD;
     listU = new LinkedList();
     listD = new LinkedList();
-    int abc[28] = {1, 2, 3, 2, 3, 1, 1, 1, 2, 4, 2, 4, 2, 4, 24, 4, 12, 4, 24, 4, 1, 1, 20, 21, 23, 23, 23, 12};
+    // int abc[28] = {1, 2, 3, 2, 3, 1, 1, 1, 2, 4, 2, 4, 2, 4, 24, 4, 12, 4, 24, 4, 1, 1, 20, 21, 23, 23, 23, 12};
+    // int abc[9] = {1, 3, 5, 1, 3, 7, 5, 1, 3};
     int aux;
     for (int i = 0; i < n; i++)
     {
-        // aux = 1 + rand() % 27;
-        
-        listU->insertAtTail(abc[i]);
-        listD->insertAtTail(abc[i]);
+        aux = 1 + rand() % 27;
+        listU->insertAtTail(aux);
+        listD->insertAtTail(aux);
+
     }
 }
 

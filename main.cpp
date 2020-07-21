@@ -7,9 +7,10 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(28);
-    c->printListD();
+    c->addSequence(100000);
+    // c->printListD();
     c->sDos();
+    // c->printListD();
 
     // while (it+1 < vec->end()) {
     //     auto pair = make_pair(*it, *(std::next(it, 1)));

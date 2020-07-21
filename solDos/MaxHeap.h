@@ -7,7 +7,7 @@
 #include <vector>
 #include <map>
 #include "str.h"
-// map<pair<int, int>, str>::iterator
+#define itM std::map<std::pair<int, int>, str>::iterator
 
 using namespace std;
 
@@ -17,9 +17,11 @@ private:
     int parent(int index);
     int left(int index);
     int right(int index);
-    map<pair<int, int>, str>::iterator getIndex(std::pair<int, int> pair);
+    itM getIndex(std::pair<int, int> pair);
     void updatePtrs(nodo*, map<pair<int, int>, str>::iterator);
+    void _updatePtrs(nodo* nPtr, itM index);
     void updateIndex(std::pair<int, int> pair, int newIndex);
+    nodo* compressing_ocurr(nodo* nPtr, int);
     std::map<pair<int, int>, str>* posiciones;
     vector<pair<int, pair<int, int>>>* vect;
     LinkedList *list;
@@ -27,6 +29,7 @@ public:
     MaxHeap();
     ~MaxHeap();
     void Compress(LinkedList *l);
+    void compress_mustFreq(itM maxInMap, int);
     void fillHeapAndMap();
     std::pair<int, std::pair<int, int>> getMax();
     std::pair<int, std::pair<int, int>> extractMax();
