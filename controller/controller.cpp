@@ -43,7 +43,7 @@ void controller::addSequence(int n)
     }
 }
 
-void controller::sDos()
+void controller::sUno()
 {
     if(listU == nullptr)
     {
@@ -51,9 +51,22 @@ void controller::sDos()
         return;
     }
 
-    MaxHeap *h = new MaxHeap();
-    h->Compress(listD);
-    delete h;
+    solUno *su = new solUno();
+    respUno = su->Compress(listU);
+    delete su;
+}
+
+void controller::sDos()
+{
+    if(listD == nullptr)
+    {
+        cout << "1ero ejecuta addSequence" << endl;
+        return;
+    }
+
+    MaxHeap *sd = new MaxHeap();
+    sd->Compress(listD);
+    delete sd;
 }
 
 // hace lo que crees que hace

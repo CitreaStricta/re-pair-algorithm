@@ -2,6 +2,8 @@
 
 using namespace std;
 
+int printHelp = 0;
+
 MaxHeap::MaxHeap() {
     vect = new vector<pair<int, pair<int, int>>>();
     posiciones = new map<pair<int, int>, str>();
@@ -30,12 +32,15 @@ void MaxHeap::Compress(LinkedList *l)
         // si la frecuencia del par es igual a 1, termina la compresion
 
         if(maxPair.first == 1) break;
-        printHeap();
-        cout
-        << "inicio de la comprecion: " << rule
-        << "\ndel par " << maxPair.second.first << " " << maxPair.second.second
-        << "\ncon frecuencia: " << maxPair.first <<
-        endl;
+        if(printHelp)
+        {
+            printHeap();
+            cout
+            << "inicio de la comprecion: " << rule
+            << "\ndel par " << maxPair.second.first << " " << maxPair.second.second
+            << "\ncon frecuencia: " << maxPair.first <<
+            endl;
+        }
 
         // en el map, busco el par de mayor frecuencia
         // (obtengo un iterador en el map al elemento de mayor frecuencia)
