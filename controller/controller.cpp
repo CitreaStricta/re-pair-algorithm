@@ -43,19 +43,6 @@ void controller::addSequence(int n)
     }
 }
 
-void controller::sUno()
-{
-    // if(listU == nullptr)
-    // {
-    //     cout << "1ero ejecuta addSequence" << endl;
-    //     return;
-    // }
-
-    // solUno *sUno = new solUno();
-    // respUno = sUno->Compress(listU);
-    // delete sUno;
-}
-
 void controller::sDos()
 {
     if(listU == nullptr)
@@ -72,7 +59,6 @@ void controller::sDos()
 // hace lo que crees que hace
 void controller::printListU()
 {
-    respUno;
     int aux = listU->at(0);
     int i = 1;
     while(aux > 0)
@@ -85,7 +71,6 @@ void controller::printListU()
 
 void controller::printListD()
 {
-    respUno;
     int aux = listD->at(0);
     int i = 1;
     while(aux > 0)

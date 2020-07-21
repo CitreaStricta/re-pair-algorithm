@@ -15,7 +15,6 @@ public:
     LinkedList *listD;
     controller();
     ~controller();
-    void sUno();
     void sDos();
     void addSequence(int);
     void printListU();
