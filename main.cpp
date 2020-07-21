@@ -7,12 +7,16 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(100);
-    c->printListU();
-    c->sUno();
+    c->addSequence(10000);
+    // c->printListU();
+    cout << c->listU->size() << endl;
+    // c->sUno();
     c->sDos();
-    c->printListU();
-    c->printListD();
+    cout << c->listU->size() << endl;
+    cout << c->listD->size() << endl;
+
+    // c->printListU();
+    // c->printListD();
     delete c;
     return 0;
 }
