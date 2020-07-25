@@ -32,8 +32,7 @@ vector<pair<int, pair<int, int>>>* solUno::Compress(LinkedList *l)
         {return a.second < b.second;});
         pair<int, int> replace = BEEG->first;
 
-        // cout << "Max is: " << BEEG->first.first << " " << BEEG->first.second << ", " << BEEG->second << endl;
-        // cout << "Tenemos que reemplasar el par: " << replace.first << " " << replace.second<< endl;
+        cout << BEEG->first.first << " " << BEEG->first.second << ", " << BEEG->second << endl;
 
         if(BEEG->second == 1) break;
 
@@ -77,7 +76,7 @@ map<pair<int,int>, int>* solUno::fillMap()
 
         it++;
     }
-    
+
     return m;
 }
 

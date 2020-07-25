@@ -7,7 +7,7 @@ int main()
 {
     controller *c = new controller();
 
-    c->addSequence(1000);
+    c->addSequence(10000);
     // c->printListU();
     cout << c->listU->size() << endl;
     c->sUno();
@@ -15,8 +15,8 @@ int main()
     cout << c->listU->size() << endl;
     cout << c->listD->size() << endl;
 
-    // c->printListU();
-    // c->printListD();
+    
+    
     delete c;
     return 0;
 }
