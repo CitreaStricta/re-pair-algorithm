@@ -77,24 +77,7 @@ map<pair<int,int>, int>* solUno::fillMap()
 
         it++;
     }
-    // auto itMap2 = m->begin();
-<<<<<<< HEAD
-
-    // while(itMap2 != m->end())
-    // {
-    //     cout << itMap2->first.first << " " << itMap2->first.second << ", " << itMap2->second << endl;
-    //     itMap2++;
-    // }
-
-    return m;
-=======
-    //
-    // while(itMap2 != m->end())
-    // {
-    //     cout << itMap2->first.first << " " << itMap2->first.second << ", " << itMap2->second << endl;
-    //     itMap2++;
-    // }
-
+    
     return m;
 }
 
@@ -117,5 +100,4 @@ void solUno::ParCompress(int regla, pair<int, int> par)
         }
         it++;
     }
->>>>>>> solUno
 }
