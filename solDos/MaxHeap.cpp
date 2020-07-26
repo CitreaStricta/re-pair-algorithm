@@ -78,6 +78,12 @@ void MaxHeap::fillHeapAndMap()
 }
 
 // comprime el par mas frecuente (el que esta en la raiz del heap)
+/**
+ * Ya, mira
+ * El par que mas se repite es el (x,y). Con 50 repeticiones de este
+ * Asi que sigue revisando los pares de los lados del par hasta que las
+ * repeticiones sean 0
+*/
 void MaxHeap::compress_mustFreq(itM maxInHeap, int rule)
 {   // vayamos a la 1era ocurrencia del par
     // utilizando el puntero en el str del map
@@ -90,7 +96,7 @@ void MaxHeap::compress_mustFreq(itM maxInHeap, int rule)
         // veamos cual es el par izquierdo
         pairHandler = make_pair(ref->prev->n, ref->n);
         // aseguremonos de que el 1er valor del par izquierdo
-        // no sea el valor de la "head" (-2) de la LL
+        // no sea el valor de la "head" (-2) de la LL el felipito la masca
         if(pairHandler.first != -2)
         {   // con el par izquierdo en mano (pairHandler)
             // busquemoslo en el map
@@ -128,8 +134,6 @@ void MaxHeap::compress_mustFreq(itM maxInHeap, int rule)
         ref = compressing_ocurr(ref, rule);
 
         maxInHeap->second.first = ref;
-        // printHeap();
-        // printIndexes();
         
         // si ya no hay mas ocurrencias del par termina la comprecion del par
         if(ref == nullptr) break;
@@ -190,7 +194,6 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     // else cout << nPtr->n << " " << nPtr->next->n << endl;
     return auxN;
 }
-
 
 itM MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
