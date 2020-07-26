@@ -16,8 +16,16 @@ MaxHeap::~MaxHeap() {
 
 void MaxHeap::Compress(LinkedList *l)
 {
-    int rule = 28;
     list = l;
+    int rule = 28;
+    if(list->size() < 2)
+    {
+        cout
+        << "no hay suficientes elementos para intentar comprimir, o "
+        << "ejecutaste sDos primero que addSequence."
+        << endl;
+        return;
+    }
     fillHeapAndMap();
 
     // HASTA AQUI, EL MAP, EL HEAP Y LOS PUNTEROS PREVOCURR Y NEXTOCURR DE LOS NODOS
@@ -176,10 +184,10 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     // 5.- agregar al heap y al map los nuevos pares
     // (teniendo cuidado de que estos pares nuevos no sean la head o la tail de la LL)
     if(nPtr->prev->prev != nullptr) insert(make_pair(nPtr->prev->n, nPtr->n), nPtr->prev);
-    else cout << nPtr->prev->n << " " << nPtr->n << endl;
+    // else cout << nPtr->prev->n << " " << nPtr->n << endl;
     
     if(nPtr->next->next != nullptr) insert(make_pair(nPtr->n, nPtr->next->n), nPtr);
-    else cout << nPtr->n << " " << nPtr->next->n << endl;
+    // else cout << nPtr->n << " " << nPtr->next->n << endl;
     return auxN;
 }
 

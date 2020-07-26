@@ -12,8 +12,6 @@ using namespace std;
 class controller
 {
 private:
-    vector<pair<int, pair<int, int>>> *respUno;
-    vector<pair<int, pair<int, int>>> *respDos;
 public:
     LinkedList *listU;
     LinkedList *listD;

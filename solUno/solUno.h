@@ -1,6 +1,5 @@
 #include "../LinkedList/LinkedList.h"
 #include <iostream>
-#include <algorithm>
 #include <utility>
 #include <vector>
 #include <map>
@@ -14,7 +13,7 @@ private:
 public:
     solUno();
     ~solUno();
-    vector<pair<int, pair<int, int>>>* Compress(LinkedList*);
-    map<pair<int, int>, int>* fillMap();
+    void Compress(LinkedList*);
+    pair<pair<int, int>, int> return_most_repeated();
     void ParCompress(int, pair<int, int>);
 };
