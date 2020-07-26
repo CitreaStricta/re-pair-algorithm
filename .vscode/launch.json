@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/main",
             "args": [
-                "10000",
+                "500",
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

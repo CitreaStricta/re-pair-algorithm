@@ -24,13 +24,19 @@ Iterator& Iterator::operator--(int){
     return *this;
 }
 
+bool Iterator::hasNext(){
+    if (_nodo->next != _end)
+        return true;
+    return false;
+}
+
 void Iterator::goToStart()
 {
     _nodo = _begin;
 }
 
 nodo* Iterator::nodo() {
-    return this->_nodo;
+    return _nodo;
 }
 
 nodo* Iterator::begin() {

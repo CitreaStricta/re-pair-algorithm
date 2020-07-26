@@ -14,6 +14,6 @@ public:
     solUno();
     ~solUno();
     void Compress(LinkedList*);
-    pair<pair<int, int>, int> return_most_repeated();
+    pair<pair<int, int>, int> return_most_freq();
     void ParCompress(int, pair<int, int>);
 };

@@ -12,7 +12,8 @@ public:
     Iterator(struct nodo* begin, struct nodo* end);
     ~Iterator();
     Iterator& operator++(int);
-    Iterator& operator--(int);    
+    Iterator& operator--(int);
+    bool hasNext();
     void goToStart();
     struct nodo* begin();
     struct nodo* end();

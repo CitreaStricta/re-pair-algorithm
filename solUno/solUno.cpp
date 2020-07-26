@@ -15,28 +15,30 @@ void solUno::Compress(LinkedList *l)
         cout
         << "no hay suficientes elementos para intentar comprimir, o "
         << "ejecutaste sUno primero que addSequence."
-        <<endl;
+        << endl;
         return;
     }
 
-    auto replace = return_most_repeated();
-    while(replace.second != 0) // Complejidad [numero de pares] * [busqueda en el map] * [iteracion en la LL] ~ O(n*logn)
+    // mientras que la frecuencia del par mas repetido sea distinto de 1, continua
+    auto replace = return_most_freq();
+    while(replace.second != 1)
     {
-        ParCompress(rule, replace.first);
+        ParCompress(rule, replace.first); // O(n)
 
         // Buscar y cambiar el par encontrado por la rule 28, 29, ..., [rule]
-        replace = return_most_repeated();
+        replace = return_most_freq(); // O(n*logn)
 
         // cout << replace.first.first << " " << replace.first.second << ", " << replace.second << endl;
+
         rule++;
     }
     return;
 }
 
-pair<pair<int,int>, int> solUno::return_most_repeated()
+pair<pair<int,int>, int> solUno::return_most_freq()
 {
     map<pair<int,int>, int> *m = new map<pair<int,int>, int>();
-    auto big = make_pair(make_pair(1, 1), 0);
+    auto big = make_pair(make_pair(1, 1), 1);
 
     //////////iteracion en la linked list//////////
     // creo un puntero nodo que apunta al 1er nodo de la lista
@@ -47,7 +49,7 @@ pair<pair<int,int>, int> solUno::return_most_repeated()
     Iterator it = list->begin();
     pair<int, int> pAux;
     
-    while(it.nodo()->next != it.end()) // O(n)
+    while(it.hasNext()) // O(n)
     {
         pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
         itMap = m->find(pAux); // O(n*Logn)
@@ -71,16 +73,19 @@ void solUno::ParCompress(int regla, pair<int, int> par)
 {
     Iterator it = list->begin();
 
-    while(it.nodo()->next != it.end())
+    // mientras que haya un siguiente nodo, continua
+    while(it.hasNext())
     {
         if(it.nodo()->n == par.first &&
            it.nodo()->next->n == par.second)
         {
             it.nodo()->n = regla;
             list->popAt(it.nodo()->next);
-            // esto es para el extranio caso de que el par este al final de la lista.
-            // Si ese fuera el caso, el while se queda en un loop infinito
-            if(it.nodo()->next == it.end()) break;
+
+            // por temas con la LL, es necesario revisar
+            // si el siguiente elemento en ella es la "tail"
+            // si no se revisa, el programa quedara atrapado el el while
+            if(!it.hasNext()) break;
         }
         it++;
     }

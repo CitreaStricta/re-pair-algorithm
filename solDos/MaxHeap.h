@@ -18,8 +18,8 @@ private:
     int left(int index);
     int right(int index);
     itM getIndex(std::pair<int, int> pair);
-    void updatePtrs(nodo*, map<pair<int, int>, str>::iterator);
-    void _updatePtrs(nodo* nPtr, itM index);
+    void updatePtrsForInsert(nodo*, map<pair<int, int>, str>::iterator);
+    void updatePtrsForDeletion(nodo* nPtr, itM index);
     void updateIndex(std::pair<int, int> pair, int newIndex);
     nodo* compressing_ocurr(nodo* nPtr, int);
     std::map<pair<int, int>, str>* posiciones;
@@ -29,7 +29,7 @@ public:
     MaxHeap();
     ~MaxHeap();
     void Compress(LinkedList *l);
-    void compress_mustFreq(itM maxInMap, int);
+    void compress_most_Freq(itM maxInMap, int);
     void fillHeapAndMap();
     std::pair<int, std::pair<int, int>> getMax();
     std::pair<int, std::pair<int, int>> extractMax();
@@ -43,6 +43,7 @@ public:
     void printIndexes();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator begin();
     std::vector<std::pair<int, std::pair<int, int>>>::iterator end();
+    void checkPointers(str stru);
 };
 
 #endif
