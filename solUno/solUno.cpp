@@ -38,18 +38,16 @@ pair<pair<int,int>, int> solUno::return_most_repeated()
     map<pair<int,int>, int> *m = new map<pair<int,int>, int>();
     auto big = make_pair(make_pair(1, 1), 0);
 
-
-
     //////////iteracion en la linked list//////////
     // creo un puntero nodo que apunta al 1er nodo de la lista
-    Iterator it = list->begin();
-    // creo un pair auxiliar para manejar los valores
-    pair<int, int> pAux;
+
     // cuando la tail de la LL se alcance entonces no quedaran mas
     // valores en la LL por los cuales iterar
     map<pair<int,int>, int>::iterator itMap;
+    Iterator it = list->begin();
+    pair<int, int> pAux;
     
-    while(it.nodo()->next != it.end())
+    while(it.nodo()->next != it.end()) // O(n)
     {
         pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
         itMap = m->find(pAux); // O(n*Logn)
@@ -72,7 +70,6 @@ pair<pair<int,int>, int> solUno::return_most_repeated()
 void solUno::ParCompress(int regla, pair<int, int> par)
 {
     Iterator it = list->begin();
-    nodo *nodoH = list->head;
 
     while(it.nodo()->next != it.end())
     {

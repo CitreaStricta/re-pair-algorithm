@@ -1,6 +1,3 @@
-// #ifndef CONTROL_H
-// #define CONTROL_H
-
 #include "../LinkedList/LinkedList.h"
 #include "../solDos/MaxHeap.h"
 #include "../solUno/solUno.h"
@@ -24,5 +21,3 @@ public:
     void printListD();
     void compress();
 };
-
-// #endif

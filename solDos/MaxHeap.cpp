@@ -2,8 +2,6 @@
 
 using namespace std;
 
-int printHelp = 0;
-
 MaxHeap::MaxHeap() {
     vect = new vector<pair<int, pair<int, int>>>();
     posiciones = new map<pair<int, int>, str>();
@@ -26,48 +24,38 @@ void MaxHeap::Compress(LinkedList *l)
         << endl;
         return;
     }
+
     fillHeapAndMap();
 
     // HASTA AQUI, EL MAP, EL HEAP Y LOS PUNTEROS PREVOCURR Y NEXTOCURR DE LOS NODOS
     // DE LA LL ESTAN TODOS BIEN. AHORA INICIA EL PROCESO DE COMPRESION REAL
 
     // hasta que el par en la raiz del heap no sea igual a 1, continua comprimiendo
-    pair<int, pair<int, int>> maxPair;
-    itM maxInHeap;
+    pair<int, pair<int, int>> auxPair;
+    itM maxInMap;
     while(true)
     {   // reviso en el heap cual es el par de mayor frecuencia
-        maxPair = getMax();
-        // si la frecuencia del par es igual a 1, termina la compresion
+        auxPair = getMax();
 
-        if(maxPair.first == 1) break;
-        if(printHelp)
-        {
-            printHeap();
-            cout
-            << "inicio de la comprecion: " << rule
-            << "\ndel par " << maxPair.second.first << " " << maxPair.second.second
-            << "\ncon frecuencia: " << maxPair.first <<
-            endl;
-        }
+        // si la frecuencia del par es igual a 1, termina la compresion
+        if(auxPair.first == 1) break;
 
         // en el map, busco el par de mayor frecuencia
-        // (obtengo un iterador en el map al elemento de mayor frecuencia)
-        maxInHeap = getIndex(maxPair.second);
-        // utilizando los punteros en la str del par en el map
-        // comprimo el par que mas se repite
-        // y tambien cambio los ptrs correspondientes
-        compress_mustFreq(maxInHeap, rule);
+        maxInMap = getIndex(auxPair.second);
+
+        // utilizando los punteros en la str del par (maxInMap)
+        // actualizo los ptrs correspondientes
+        // y comprimo el par
+        compress_mustFreq(maxInMap, rule);
         rule++;
     }
 }
 
 void MaxHeap::fillHeapAndMap()
-{   // creo un puntero nodo que apunta al 1er nodo de la lista
+{   // creo un iterador de LL que apunta al 1er nodo de la lista
     Iterator it = list->begin();
     // creo un pair auxiliar para manejar los valores
     pair<int, int> pAux;
-    // cuando la tail de la LL se alcance entonces no quedaran mas
-    // valores en la LL por los cuales iterar
     while(it.nodo()->next != it.end())
     {   // se le inserta el nuevo (o repetido) par al heap,
         // junto a un puntero al 1er elemento del par
@@ -78,25 +66,20 @@ void MaxHeap::fillHeapAndMap()
 }
 
 // comprime el par mas frecuente (el que esta en la raiz del heap)
-/**
- * Ya, mira
- * El par que mas se repite es el (x,y). Con 50 repeticiones de este
- * Asi que sigue revisando los pares de los lados del par hasta que las
- * repeticiones sean 0
-*/
-void MaxHeap::compress_mustFreq(itM maxInHeap, int rule)
+void MaxHeap::compress_mustFreq(itM maxInMap, int rule)
 {   // vayamos a la 1era ocurrencia del par
+
     // utilizando el puntero en el str del map
-    nodo *ref = maxInHeap->second.first;
+    nodo *ref = maxInMap->second.first;
+
     // mientras que aun haya ocurrencias del par (x, y) por comprimir, continua
     pair<int, int> pairHandler;
     while(true)
     {
-        ///* 1ero revisemos el par izquierdo *///
-        // veamos cual es el par izquierdo
+        ///* 1ero revisemos el par izquierdo de la ocurrencia actual *///
         pairHandler = make_pair(ref->prev->n, ref->n);
         // aseguremonos de que el 1er valor del par izquierdo
-        // no sea el valor de la "head" (-2) de la LL el felipito la masca
+        // no sea el valor de la "head" (-2) de la LL
         if(pairHandler.first != -2)
         {   // con el par izquierdo en mano (pairHandler)
             // busquemoslo en el map
@@ -133,14 +116,14 @@ void MaxHeap::compress_mustFreq(itM maxInHeap, int rule)
         // ahora hay que comprimir la 1era, 2da, etc... ocurrencia del par que mas se esta repitiendo
         ref = compressing_ocurr(ref, rule);
 
-        maxInHeap->second.first = ref;
+        maxInMap->second.first = ref;
         
         // si ya no hay mas ocurrencias del par termina la comprecion del par
         if(ref == nullptr) break;
     }
     
     // por ultimo, eliminemos el par resien comprimido del heap y del map
-    delete_pair(maxInHeap);
+    delete_pair(maxInMap);
 }
 
 // Revise un ptr a la ocurrencia a comprimir,
@@ -195,6 +178,8 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     return auxN;
 }
 
+// Devuelve un iterador en el map al par.
+// Si el par no esta, devuelve el iderador del final del map
 itM MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
     return it;
@@ -256,18 +241,6 @@ void MaxHeap::shiftDown(int index) {
             return;
         }
     }
-}
-
-void MaxHeap::updatePtrs(nodo* nPtr, itM index)
-{
-    // le entrego al par actual un puntero a su ocurrencia anterior
-    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
-    // la str del par en el map)
-    nPtr->prevOcurr = index->second.last;
-    // al penultimo par le entrego su siguiente ocurrencia
-    nPtr->prevOcurr->nextOcurr = nPtr;
-    // la ultima ocurrencia del par termina siendo guardada en la str del par en el map
-    index->second.last = nPtr;
 }
 
 // actualiza los ptrs [prev/next]Ocurr del nodo a sacar de la LL
@@ -349,13 +322,13 @@ void MaxHeap::_updatePtrs(nodo* nPtr, itM index)
 
 void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
     // llamo a un iterador de map para decirme si el par esta, o no
-    auto index = getIndex(pair);
+    itM index = getIndex(pair);
     // si el par no es encontrado, entonces hay que agregarlo
     if (index == posiciones->end()) {
         auto entry = make_pair(1, pair);
         vect->push_back(entry);
 
-        // creo la estructura a incertar en el map junto al par "pair"
+        // creo la estructura a insertar en el map junto al par "pair"
         str str_aux;
         str_aux.first = str_aux.last = nPtr;
         str_aux.heapIndex = vect->size() - 1;
@@ -370,6 +343,18 @@ void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
         // y la frecuencia del par
         updateFrequency(index, 1);
     }
+}
+
+void MaxHeap::updatePtrs(nodo* nPtr, itM index)
+{
+    // le entrego al par actual un puntero a su ocurrencia anterior
+    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
+    // la str del par en el map)
+    nPtr->prevOcurr = index->second.last;
+    // al penultimo par le entrego su siguiente ocurrencia
+    nPtr->prevOcurr->nextOcurr = nPtr;
+    // la ultima ocurrencia del par termina siendo guardada en la str del par en el map
+    index->second.last = nPtr;
 }
 
 void MaxHeap::shiftUp(int index) {
