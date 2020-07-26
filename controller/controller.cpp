@@ -5,7 +5,6 @@ using namespace std;
 controller::controller()
 {
     srand(time(NULL));
-    respUno = respDos = nullptr;
     listU = listD = nullptr;
 }
 
@@ -13,8 +12,6 @@ controller::~controller()
 {
     if(listU != nullptr) delete listU;
     if(listD != nullptr) delete listD;
-    delete respUno;
-    delete respDos;
 }
 
 /**
@@ -31,15 +28,12 @@ void controller::addSequence(int n)
     if(listD != nullptr) delete listD;
     listU = new LinkedList();
     listD = new LinkedList();
-    // int abc[28] = {1, 2, 3, 2, 3, 1, 1, 1, 2, 4, 2, 4, 2, 4, 24, 4, 12, 4, 24, 4, 1, 1, 20, 21, 23, 23, 23, 12};
-    // int abc[9] = {1, 3, 5, 1, 3, 7, 5, 1, 3};
     int aux;
     for (int i = 0; i < n; i++)
     {
         aux = 1 + rand() % 27;
         listU->insertAtTail(aux);
         listD->insertAtTail(aux);
-
     }
 }
 
@@ -52,7 +46,7 @@ void controller::sUno()
     }
 
     solUno *su = new solUno();
-    respUno = su->Compress(listU);
+    su->Compress(listU);
     delete su;
 }
 
