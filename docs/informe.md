@@ -4,8 +4,8 @@
 <p align="center" style="font-size:24pt; font-bold:true">Proyecto 2</p>
 <p align="center" style="font-size:14pt; font-bold:true">Felipe Alejandro Cerda Saavedra</p>
 <p align="center" style="font-size:14pt; font-bold:true">Matrícula: 2019060121</p>
-<p align="center" style="font-size:14pt; font-bold:true">Victini Schultz Solano</p>
-<p align="center" style="font-size:14pt; font-bold:true">Matrícula: 201600000</p>
+<p align="center" style="font-size:14pt; font-bold:true">Vicente Schultz Solano</p>
+<p align="center" style="font-size:14pt; font-bold:true">Matrícula: 2018404179</p>
 
 <div style="page-break-after: always;"></div>
 
@@ -71,25 +71,115 @@ A continuación mostramos ejemplo de la ejecución de ambos pasos.
 
 ```
 
-### Implementación Solución 1
+### Implementación Solución 2
 
-#### Reseña Solución 1
+#### Reseña Solución Avanzada
 
-#### Demostración de Ejecución Solución 1
+la solucion avabzada es nyy bonita blah blah. Para resolver el problema se extendio la funcionalidad normal de MAX-Heap agregando blah blah. Para todos los efectos nos referimos a esta estructura simplemente como MAX-heap.
+
+#### Demostración de Ejecución Solución 2
 
 
 **Creación Lista Enlazada**
 
+Al crear la lista enlazada los nodos `head` y `tail` se inicializan con valor `-2` y los nodos `next`, `nextOcurr`, `prev` y `prevOcurr` en `null`.
+
 ```cpp
+LinkedList::LinkedList()
+{
+    // ambos nodos, head y tail, estan apuntando, con next y prev
+    // respectivamente, a tail y head respectivamente
+    // (el resto de los punteros de cada uno estara SIEMPRE apuntando a nullptr)
+    head = new nodo();
+    head->next = tail;
+    head->n = -2;
+    head->prev = nullptr;
+    head->nextOcurr = nullptr;
+    head->prevOcurr = nullptr;
+    
+    tail = new nodo();
+    tail->prev = head;
+    tail->n = -2;
+    tail->next = nullptr;
+    tail->nextOcurr = nullptr;
+    tail->prevOcurr = nullptr;
 
-
+    mysize = 0;
+}
 ```
 
-**Buscar par mayor frecuencia:**
+**Llenar MAX-heap y map**
+
 
 ```cpp
+void MaxHeap::fillHeapAndMap()
+{   // creo un puntero nodo que apunta al 1er nodo de la lista
+    Iterator it = list->begin();
+    // creo un pair auxiliar para manejar los valores
+    pair<int, int> pAux;
+    // cuando la tail de la LL se alcance entonces no quedaran mas
+    // valores en la LL por los cuales iterar
+    while(it.nodo()->next != it.end())
+    {   // se le inserta el nuevo (o repetido) par al heap,
+        // junto a un puntero al 1er elemento del par
+        pAux = make_pair(it.nodo()->n, it.nodo()->next->n);
+        insert(pAux, it.nodo());
+        it++;
+    }
+}
 
+void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
+    // llamo a un iterador de map para decirme si el par esta, o no
+    auto index = getIndex(pair);
+    // si el par no es encontrado, entonces hay que agregarlo
+    if (index == posiciones->end()) {
+        auto entry = make_pair(1, pair);
+        vect->push_back(entry);
 
+        // creo la estructura a incertar en el map junto al par "pair"
+        str str_aux;
+        str_aux.first = str_aux.last = nPtr;
+        str_aux.heapIndex = vect->size() - 1;
+
+        posiciones->insert(make_pair(pair, str_aux));
+        shiftUp(vect->size() - 1);
+    } else {
+        // actualizo:
+        // los punteros de nextOcurr/prevOcurr de los nodos de la LL con par repetido
+        // y el puntero de la ultima ocurrencia de este par
+        updatePtrs(nPtr, index);
+        // y la frecuencia del par
+        updateFrequency(index, 1);
+    }
+}
+
+void MaxHeap::updatePtrs(nodo* nPtr, itM index)
+{
+    // le entrego al par actual un puntero a su ocurrencia anterior
+    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
+    // la str del par en el map)
+    nPtr->prevOcurr = index->second.last;
+    // al penultimo par le entrego su siguiente ocurrencia
+    nPtr->prevOcurr->nextOcurr = nPtr;
+    // la ultima ocurrencia del par termina siendo guardada en la str del par en el map
+    index->second.last = nPtr;
+}
+
+void MaxHeap::updateFrequency(itM index, int change) {
+    /// buscar
+    if (index == posiciones->end())
+        return;
+
+    vect->at(index->second.heapIndex).first += change;
+    if (vect->at(index->second.heapIndex).first <= 0) {
+        delete_pair(index);
+    }
+    else if (change < 0) {
+        shiftDown(index->second.heapIndex);
+    } else {
+        shiftUp(index->second.heapIndex);
+    }
+}
 ```
 
 **Reemplazar par mayor frecuencia**
@@ -111,5 +201,7 @@ completo con al menos 3 pasos donde se vea cómo se van actualizando los punter
 de datos, para la versión avanzada).
 
 ## Evaluación experimental
+
+![alt image](./comp_tiempo_experi.png)
 
 ## Anexos
