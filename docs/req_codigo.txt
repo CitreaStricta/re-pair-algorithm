@@ -116,3 +116,73 @@ El algoritmo funcionará del siguiente modo:
                 se deben mantener los punteros en la lista doblemente enlazada.
                 Estos detalles de implementación pueden complicar el proyecto, 
                 por lo que se recomienda realizar un ejemplo completo en papel en el que se analicen todos los casos.
+
+                El negro (lapiz mina) simbolisa los nodos de la LinkedList y a las conecciones que van de nodo a nodo.
+
+                El rojo simbolisa ptrs de nextOcurr y prevOcurr:
+                Si un nodo solo tiene un NULL, significa que sus ptrs [next/prev]Ocurr estan ambos apuntanto a nullptr
+                [next/prev]Ocurr se ven simbolisados por conecciones rojas a la izquierda y a la derecha
+                si esa coneccion tiene un NULL entonces esa ocurrencia no tiene una ocurrencia anterior o siguiente.
+
+                El verde simbolisa ptr de las estructuras que se encuentran en el Map.
+                Si apuntan a un NULL entonces, en ese momento, ese par no tiene ninguna ocurrencia en la LinkedList
+                Si apuntan a un solo nodo, entonces solo tienen esa unica ocurrencia de par en la LinkedList
+                Si apuntan a dos nodos distintos, entonces tienen 2 o mas ocurrencias de ese par en la LinkedList
+
+                Ej:
+
+                            (DIBUJO)
+
+                (Plas texto (solo un poquito))
+
+                Despues de ejecutar "prepair_ptrs_for_compression", por primera vez, la lista anterior queda de la siguiente forma:
+
+                            (DIBUJO)
+
+                la mayoria de los punteros a estructuras siguen iguales. A exepcion de los pares {2, 7} y {1, 3}.
+
+                El {2, 7} va a dejar de tener su unica ocurrencia por lo que los punteros de su estructura en el Map ahora
+                apuntaran a nullptrs.
+
+                Y el {1, 3} ahora tendra a su segunda ocurrencia como su siguiente ocurrencia, su primera ocurrencia
+                dejara de estar en la cadena de ocurrencia, el puntero nextOcurr de su primera ocurrencia pasara a ser un nullptr y
+                el puntero prevOcurr de su segunda ocurrencia pasara a ser un nullptr.
+
+                Ahora "compressing_ocurr" se ejecutara, dejando a la lista de la siguiente forma
+
+                        (DIBUJO)
+                
+                El nodo que seguia despues del nodo que contenia al valor 7 fue eliminado.
+                Y el nodo que contenia al 7 fue intercambiado por la regla 28 de compresion.
+                Se agregaron dos pares nuevos al Map y al Heap. El par {2, 28} y el {28, 3} 
+
+                "prepair_ptrs_for_compression" se ejecuta por segunda vez y la lista queda
+
+                        (DIBUJO)
+
+                la mayoria de los punteros a estructuras siguen iguales. A exepcion de los pares {5, 7} y {1, 3}.
+                
+                El {5, 7} va a dejar de tener su unica ocurrencia por lo que los punteros de su estructura en el Map ahora
+                apuntaran a nullptrs.
+
+                Y el {1, 3} ahora tendra a su segunda ocurrencia como su unica ocurrencia, su primera ocurrencia
+                dejara de estar en la cadena de ocurrencia, el puntero nextOcurr de su primera ocurrencia pasara a ser un nullptr y
+                el puntero prevOcurr de su segunda ocurrencia (ahora ultima ocurrencia) pasara a ser un nullptr.
+
+                "compressing_ocurr" se ejecutara por segunda vez, dejando a la lista de la siguiente forma
+
+                        (DIBUJO)
+
+                El nodo que seguia despues del nodo que contenia al valor 7 fue eliminado.
+                Y el nodo que contenia al 7 fue intercambiado por la regla 28 de compresion.
+                Se agrego el par {5, 28} al Map y al Heap. Y la frecuencia del par {28, 3} se vio aumentada en 1.
+
+                "prepair_ptrs_for_compression" y "compressing_ocurr" se ejecutan ambos por tercera vez, dejando a la LinkedList
+                de la siguiente forma:
+
+                        (DIBUJO)
+
+                El nodo que seguia despues del nodo que contenia al valor 7 fue eliminado.
+                Y el nodo que contenia al 7 fue intercambiado por la regla 28 de compresion.
+                Se agrego el par {5, 28} al Map y al Heap. Y la frecuencia del par {28, 3} se vio aumentada en 1.
+                

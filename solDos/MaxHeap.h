@@ -19,7 +19,7 @@ private:
     int right(int index);
     itM getIndex(std::pair<int, int> pair);
     void updatePtrsForInsert(nodo*, map<pair<int, int>, str>::iterator);
-    void updatePtrsForDeletion(nodo* nPtr, itM index);
+    void prepair_ptrs_for_compression(nodo* nPtr, itM index);
     void updateIndex(std::pair<int, int> pair, int newIndex);
     nodo* compressing_ocurr(nodo* nPtr, int);
     std::map<pair<int, int>, str>* posiciones;
