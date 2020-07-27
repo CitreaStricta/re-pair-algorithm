@@ -141,7 +141,7 @@ Al igual que para la solución 1, es clave el uso de la composición para relaci
 Como se ha señalado previamente, la solución 1 resuelve el problema mediante la iteración de dos operaciones consecutivas:
 
 1. Recorrer la lista para buscar el par de mayor frecuencia.
-2. Si la frecuencia del par anterior es mayor a 1, recorrer la lista para reemplazarlo por un nuevo símbolo(no presente en la lista).
+2. Si la frecuencia del par anteriperteneceor es mayor a 1, recorrer la lista para reemplazarlo por un nuevo símbolo(no presente en la lista).
 
 A continuación mostramos ejemplo de la ejecución de ambos pasos.
 
@@ -303,6 +303,3 @@ Como se puede apreciar en el gráfico, los resultados del análisis teórico son
 Se puede decir, sin que esto constituya prueba formal, que la solución 1 pertenece a $O(nlog(n))$ y que la solución 2 pertenece a $O(log(n))$
 
 ![alt image](./comp_tiempo_experi.png)
-
-## Anexos
-
