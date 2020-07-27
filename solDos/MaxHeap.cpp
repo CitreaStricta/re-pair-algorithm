@@ -25,7 +25,7 @@ void MaxHeap::Compress(LinkedList *l)
         return;
     }
 
-    fillHeapAndMap();
+    fillHeapAndMap(); // O(n*Logn) (se ejecuta solo 1 (UNA) vez)
 
     // HASTA AQUI, EL MAP, EL HEAP Y LOS PUNTEROS PREVOCURR Y NEXTOCURR DE LOS NODOS
     // DE LA LL ESTAN TODOS INICIADOS CORRECTAMENTE.
@@ -42,7 +42,7 @@ void MaxHeap::Compress(LinkedList *l)
         if(auxPair.first == 1) break;
 
         // en el map, busco el par de mayor frecuencia
-        maxInMap = getIndex(auxPair.second);
+        maxInMap = getIndex(auxPair.second); // O(Logn)
 
         // utilizando los punteros en la struct del par (maxInMap)
         // actualizo los ptrs correspondientes
@@ -54,7 +54,7 @@ void MaxHeap::Compress(LinkedList *l)
 
 void MaxHeap::fillHeapAndMap()
 {   // creo un iterador de LL que apunta al 1er nodo de la lista
-    Iterator it = list->begin();
+    Iterator it = list->begin(); 
     // creo un pair auxiliar para manejar los valores
     pair<int, int> pAux;
     while(it.hasNext())

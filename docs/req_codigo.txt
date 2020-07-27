@@ -117,7 +117,7 @@ El algoritmo funcionará del siguiente modo:
                 Estos detalles de implementación pueden complicar el proyecto, 
                 por lo que se recomienda realizar un ejemplo completo en papel en el que se analicen todos los casos.
 
-                El negro (lapiz mina) simbolisa los nodos de la LinkedList y a las conecciones que van de nodo a nodo.
+                El negro (lapiz mina) simboliza los nodos de la LinkedList y a las conecciones que van de nodo a nodo.
 
                 El rojo simbolisa ptrs de nextOcurr y prevOcurr:
                 Si un nodo solo tiene un NULL, significa que sus ptrs [next/prev]Ocurr estan ambos apuntanto a nullptr

@@ -26,7 +26,7 @@ void solUno::Compress(LinkedList *l)
         ParCompress(rule, replace.first); // O(n)
 
         // Buscar y cambiar el par encontrado por la rule 28, 29, ..., [rule]
-        replace = return_most_freq(); // O(n*logn)
+        replace = return_most_freq(); // O(nlogn) (este se estaria repitiendo se segun el numero total de pares diferentes)
 
         // cout << replace.first.first << " " << replace.first.second << ", " << replace.second << endl;
 
