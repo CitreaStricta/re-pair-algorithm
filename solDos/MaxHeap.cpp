@@ -28,7 +28,8 @@ void MaxHeap::Compress(LinkedList *l)
     fillHeapAndMap();
 
     // HASTA AQUI, EL MAP, EL HEAP Y LOS PUNTEROS PREVOCURR Y NEXTOCURR DE LOS NODOS
-    // DE LA LL ESTAN TODOS BIEN. AHORA INICIA EL PROCESO DE COMPRESION REAL
+    // DE LA LL ESTAN TODOS INICIADOS CORRECTAMENTE.
+    // AHORA INICIA EL PROCESO DE COMPRESION REAL.
 
     // hasta que el par en la raiz del heap no sea igual a 1, continua comprimiendo
     pair<int, pair<int, int>> auxPair;
@@ -68,17 +69,15 @@ void MaxHeap::fillHeapAndMap()
 // comprime el par mas frecuente (el que esta en la raiz del heap)
 void MaxHeap::compress_most_Freq(itM maxInMap, int rule)
 {   // vayamos a la 1era ocurrencia del par
-
     // utilizando el puntero en el struct del map
     nodo *ref = maxInMap->second.first;
-    checkPointers(maxInMap->second);
+
+    ///* 1ero revisemos el par a la izquierda de la ocurrencia actual *///
 
     // mientras que aun haya ocurrencias del par (x, y) por comprimir, continua
     pair<int, int> pairHandler;
     while(true)
     {
-        ///* 1ero revisemos el par izquierdo de la ocurrencia actual *///
-
         pairHandler = make_pair(ref->prev->n, ref->n);
         // aseguremonos de que el 1er valor del par izquierdo
         // no sea el valor de la "head" (-2) de la LL
@@ -88,14 +87,14 @@ void MaxHeap::compress_most_Freq(itM maxInMap, int rule)
             itM parLeft = posiciones->find(pairHandler);
             // con la posicion del par en el map en mano
             // actualizamos sus punteros
-            updatePtrsForDeletion(ref->prev, parLeft);
+            prepair_ptrs_for_compression(ref->prev, parLeft);
             // y ahora debemos disminuir su frequencia
             updateFrequency(parLeft, -1);
         }
 
-        ///* Ahora revisemos el par derecho *///
+        ///* Ahora revisemos el par a la derecha de la ocurrencia actual *///
 
-        // el proseso es muy parecido al del par izquierdo
+        // el proseso es igual al del par izquierdo
         // por lo que podemos reutilizar algunas de las
         // variables auxiliares que ya utilizamos para el par izquierdo
         pairHandler = make_pair(ref->next->n, ref->next->next->n);
@@ -105,7 +104,7 @@ void MaxHeap::compress_most_Freq(itM maxInMap, int rule)
             itM parRight = posiciones->find(pairHandler);
             // con la posicion del par en el map en mano
             // actualizamos sus punteros
-            updatePtrsForDeletion(ref->next, parRight);
+            prepair_ptrs_for_compression(ref->next, parRight);
             // y ahora debemos disminuir su frequencia
             updateFrequency(parRight, -1);
         }
@@ -114,12 +113,99 @@ void MaxHeap::compress_most_Freq(itM maxInMap, int rule)
 
         maxInMap->second.first = ref;
         
-        // si ya no hay mas ocurrencias del par, termina la comprecion del par
+        // si ya no hay mas ocurrencias del par, termina la compresion del par
         if(ref == nullptr) break;
     }
     
     // por ultimo, eliminemos el par resien comprimido del heap y del map
     delete_pair(maxInMap);
+}
+
+/*
+ * actualiza los ptrs [prev/next]Ocurr y, si estamos en la 1era o ultima ocurrencia,
+ * actualiza tambien los punteros de first/last de la struct del par en el map
+ * de los nodos que se veran afectados por la compresion de la ocurrencia actual 
+ * (es decir, los nodos a los lados de la ocurrencia)
+ * 
+ * Los nodos afectados dejaran de ser una ocurrencia de sus pares respectivos
+ * y, posteriormente (despues de la ejecucion de este metodo),
+ * a su par respectivo se le disminuira su frecuencia en 1
+*/
+void MaxHeap::prepair_ptrs_for_compression(nodo* nPtr, itM index)
+{   // si el par no tiene frecuencia anterior, ni frecuencia siguiente,
+    // entonces estamos con la unica frecuencia del par
+    if(nPtr->prevOcurr != nullptr ||nPtr->nextOcurr != nullptr)
+    {   // si no tienes una ocurrencia previa entonces eres la 1era ocurrencia
+        if(nPtr->prevOcurr == nullptr)
+        {
+            index->second.first = nPtr->nextOcurr;
+            nPtr->nextOcurr->prevOcurr = nullptr;
+        }
+
+        // si no tienes una ocurrencia siguiente entonces eres la ultima ocurrencia
+        if(nPtr->nextOcurr == nullptr)
+        {
+            index->second.last = nPtr->prevOcurr;
+            nPtr->prevOcurr->nextOcurr = nullptr;
+        }
+
+        // si tienes ocurrencia anterior y siguiente enotnces estas en medio de las ocurrencias
+        if(nPtr->prevOcurr != nullptr && nPtr->nextOcurr != nullptr)
+        {
+            nPtr->prevOcurr->nextOcurr = nPtr->nextOcurr;
+            nPtr->nextOcurr->prevOcurr = nPtr->prevOcurr;
+        }
+    }
+    // como eres la unica ocurrencia del par entonces tu frecuencia pasara a ser 0
+    // y el par saldra del heap y del map. Asi, desreferenciemos los punteros
+    // de la struct en el map del par para evitar posibles problemas
+    else index->second.first = index->second.first = nullptr;
+
+    // y deja de apuntar a tus ocurrencias anterior y siguiente
+    nPtr->prevOcurr = nPtr->nextOcurr = nullptr;
+
+    /* Cementerio de comentarios */
+    // los punteros del map deben estar apuntando
+    // a la 1era ocurrencia del par, y a la ultima
+    // ocurrencia del par.
+    // Pero como este esta siendo un par al que se le esta disminuyendo
+    // su frecuencia, significa que va a dejar de ser un par
+    // de ese par (si me explico)
+    //
+    // // si el par NO tiene ocurrencia ANTERIOR, significa que estamos
+    // // en la 1era ocurrencia del par. Por lo tanto, la nueva 1era
+    // // ocurrencia sera la 2da ocurrencia del par
+    // if(nPtr->prevOcurr == nullptr) index->second.first = nPtr->nextOcurr;
+    // //si el par SI tiene ocurrencia enterior, estamos en medio de las
+    // // ocurrencias del par. Por lo tanto, no cambiamos el ptr de 1er ocurrencia
+    // // de este par
+    // else /* nada (LA CARACOLA MAGICA HA HABLADO!! alalalalalalalalalala!!!)*/;
+    //
+    // // revisamos lo mismo que lo anterior, pero para el caso de que
+    // // la ocurrencia actual NO tenga SIGUIENTE ocurrencia
+    // if(nPtr->nextOcurr == nullptr) index->second.last = nPtr->prevOcurr;
+    // else /* nada */;
+    //
+    // /**references
+    //  * ahora actualizemos los ptrs [next/prev]Ocurr del nodo.
+    //  * prevOcurr esta apuntando a la ocurrencia siguiente.
+    //  * Pero como este par prontamente dejara de existir, tenemos
+    //  * que deslinkearlo de la cadena de ocurrencias
+    //  */
+    //
+    // // si el par no tiene ocurrencia anterior, no hacemos nada
+    // if(nPtr->prevOcurr == nullptr) /* nada */;
+    // // si el par SI tiene ocurrencia ANTERIOR, estamos en medio de las
+    // // ocurrencias del par. Por lo tanto, tenemos que actualizar el ptr
+    // // de la ocurrencia anterior de la ocurrencia siguiente de la ocurrencia actual para que
+    // // apunte a la ocurrencia anterior de la ocurrencia actual (uno, o lo dibuja, o se pierde)
+    // else nPtr->nextOcurr->prevOcurr = nPtr->prevOcurr;
+    //
+    // // revisamos lo mismo que lo anterior
+    // if(nPtr->nextOcurr == nullptr) /* nada */;
+    // // Pero para el caso de que
+    // // la ocurrencia actual SI tenga SIGUIENTE ocurrencia
+    // else nPtr->prevOcurr->nextOcurr = nPtr->nextOcurr;
 }
 
 /**
@@ -135,7 +221,7 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
 
     // 1.- guardar el ptr a la siguiente ocurrencia del par
     nodo *auxN = nPtr->nextOcurr;
-    // este sera retornado al final del metodo
+    // (este sera retornado al final del metodo)
 
     // 2.- desreferenciar a la ocurrencia actual de su ocurrencia siguiente
     // y a la ocurrencia siguiente de su ocurrencia anterior (que es la actual)
@@ -146,12 +232,12 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     }
 
     // 3.- eliminar el nodo siguiente 
-    /**
-     * para detectar errores, exijamos una condicion:
+    /*
+     * para detectar errores, exijamos tambien una condicion:
      * los ptrs de [next/prev]Ocurr del nodo siguiente deben de ser nullptrs.
      * Si estos no son nullptrs, entonces hubo un problema en pasos anteriores
      * (muy probablemente en metodos anteriores de manejo de punteros)
-    **/
+    */
     nodo *auxDeleter = nPtr->next;
     if(auxDeleter->prevOcurr == nullptr
     && auxDeleter->nextOcurr == nullptr)
@@ -161,7 +247,7 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     else
     {
         cout
-        << "hubo un problema en 'updatePtrsForDeletion'"
+        << "hubo un problema en 'compressing_ocurr'"
         << "con el par " << nPtr->n << " " << auxDeleter->n
         << "rule: " << rule << endl;
         return auxN;
@@ -182,8 +268,43 @@ nodo* MaxHeap::compressing_ocurr(nodo* nPtr, int rule)
     return auxN;
 }
 
-// Devuelve un iterador en el map al par.
-// Si el par no esta, devuelve el end() del map
+void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
+    // llamo a un iterador de map para decirme si el par esta, o no
+    itM index = getIndex(pair);
+    // si el par no es encontrado, entonces hay que agregarlo
+    if (index == posiciones->end()) {
+        auto entry = make_pair(1, pair);
+        vect->push_back(entry);
+
+        // creo la estructura a insertar en el map junto al par "pair"
+        str str_aux;
+        str_aux.first = str_aux.last = nPtr;
+        str_aux.heapIndex = vect->size() - 1;
+
+        posiciones->insert(make_pair(pair, str_aux));
+        shiftUp(vect->size() - 1);
+    } else {
+        // si el par ya se encuentra en el heap/map
+        // actualizo:
+        // los punteros de nextOcurr/prevOcurr de los nodos de la LL con par repetido
+        // y el puntero de la ultima ocurrencia de este par
+        updatePtrsForInsert(nPtr, index);
+        // y la frecuencia del par
+        updateFrequency(index, 1);
+    }
+}
+
+void MaxHeap::updatePtrsForInsert(nodo* nPtr, itM index)
+{   // le entrego al par actual un puntero a su ocurrencia anterior
+    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
+    // la struct del par en el map)
+    nPtr->prevOcurr = index->second.last;
+    // al penúltimo par le entrego su siguiente ocurrencia
+    nPtr->prevOcurr->nextOcurr = nPtr;
+    // la última ocurrencia del par termina siendo guardada en la stru del par en el map
+    index->second.last = nPtr;
+}
+
 itM MaxHeap::getIndex(std::pair<int, int> pair) {
     auto it = posiciones->find(pair);
     return it;
@@ -245,122 +366,6 @@ void MaxHeap::shiftDown(int index) {
             return;
         }
     }
-}
-
-// actualiza los ptrs [prev/next]Ocurr del nodo a sacar de la LL
-// (este va a dejar de estar en la LL por lo que hay que prepararlo para
-// deslinkearlo de su nodo prev y su nodo next)
-void MaxHeap::updatePtrsForDeletion(nodo* nPtr, itM index)
-{   // si el par no tiene frecuencia anterior, ni frecuencia siguiente,
-    // entonces estamos con la unica frecuencia del par
-    if(nPtr->prevOcurr != nullptr || nPtr->nextOcurr != nullptr)
-    {   // si no tienes una ocurrencia previa entonces eres la 1era ocurrencia
-        if(nPtr->prevOcurr == nullptr)
-        {
-            index->second.first = nPtr->nextOcurr;
-            nPtr->nextOcurr->prevOcurr = nullptr;
-        }
-
-        // si no tienes una ocurrencia siguiente entonces eres la ultima ocurrencia
-        if(nPtr->nextOcurr == nullptr)
-        {
-            index->second.last = nPtr->prevOcurr;
-            nPtr->prevOcurr->nextOcurr = nullptr;
-        }
-
-        // si tienes ocurrencia anterior y siguiente enotnces estas en medio de las ocurrencias
-        if(nPtr->prevOcurr != nullptr && nPtr->nextOcurr != nullptr)
-        {
-            nPtr->prevOcurr->nextOcurr = nPtr->nextOcurr;
-            nPtr->nextOcurr->prevOcurr = nPtr->prevOcurr;
-        }
-
-        
-    }
-    else index->second.first = index->second.first = nullptr;
-
-    // y deja de apuntar a tus ocurrencias anterior y siguiente
-    nPtr->prevOcurr = nPtr->nextOcurr = nullptr;
-
-
-    // los punteros del map deben estar apuntando
-    // a la 1era ocurrencia del par, y a la ultima
-    // ocurrencia del par.
-    // Pero como este esta siendo un par al que se le esta disminuyendo
-    // su frecuencia, significa que va a dejar de ser un par
-    // de ese par (si me explico)
-    //
-    // // si el par NO tiene ocurrencia ANTERIOR, significa que estamos
-    // // en la 1era ocurrencia del par. Por lo tanto, la nueva 1era
-    // // ocurrencia sera la 2da ocurrencia del par
-    // if(nPtr->prevOcurr == nullptr) index->second.first = nPtr->nextOcurr;
-    // //si el par SI tiene ocurrencia enterior, estamos en medio de las
-    // // ocurrencias del par. Por lo tanto, no cambiamos el ptr de 1er ocurrencia
-    // // de este par
-    // else /* nada (LA CARACOLA MAGICA HA HABLADO!! alalalalalalalalalala!!!)*/;
-    //
-    // // revisamos lo mismo que lo anterior, pero para el caso de que
-    // // la ocurrencia actual NO tenga SIGUIENTE ocurrencia
-    // if(nPtr->nextOcurr == nullptr) index->second.last = nPtr->prevOcurr;
-    // else /* nada */;
-    //
-    // /**references
-    //  * ahora actualizemos los ptrs [next/prev]Ocurr del nodo.
-    //  * prevOcurr esta apuntando a la ocurrencia siguiente.
-    //  * Pero como este par prontamente dejara de existir, tenemos
-    //  * que deslinkearlo de la cadena de ocurrencias
-    //  */
-    //
-    // // si el par no tiene ocurrencia anterior, no hacemos nada
-    // if(nPtr->prevOcurr == nullptr) /* nada */;
-    // // si el par SI tiene ocurrencia ANTERIOR, estamos en medio de las
-    // // ocurrencias del par. Por lo tanto, tenemos que actualizar el ptr
-    // // de la ocurrencia anterior de la ocurrencia siguiente de la ocurrencia actual para que
-    // // apunte a la ocurrencia anterior de la ocurrencia actual (uno, o lo dibuja, o se pierde)
-    // else nPtr->nextOcurr->prevOcurr = nPtr->prevOcurr;
-    //
-    // // revisamos lo mismo que lo anterior
-    // if(nPtr->nextOcurr == nullptr) /* nada */;
-    // // Pero para el caso de que
-    // // la ocurrencia actual SI tenga SIGUIENTE ocurrencia
-    // else nPtr->prevOcurr->nextOcurr = nPtr->nextOcurr;
-}
-
-void MaxHeap::insert(std::pair<int, int> pair, nodo* nPtr) {
-    // llamo a un iterador de map para decirme si el par esta, o no
-    itM index = getIndex(pair);
-    // si el par no es encontrado, entonces hay que agregarlo
-    if (index == posiciones->end()) {
-        auto entry = make_pair(1, pair);
-        vect->push_back(entry);
-
-        // creo la estructura a insertar en el map junto al par "pair"
-        str str_aux;
-        str_aux.first = str_aux.last = nPtr;
-        str_aux.heapIndex = vect->size() - 1;
-
-        posiciones->insert(make_pair(pair, str_aux));
-        shiftUp(vect->size() - 1);
-    } else {
-        // si el par ya se encuentra en el heap/map
-        // actualizo:
-        // los punteros de nextOcurr/prevOcurr de los nodos de la LL con par repetido
-        // y el puntero de la ultima ocurrencia de este par
-        updatePtrsForInsert(nPtr, index);
-        // y la frecuencia del par
-        updateFrequency(index, 1);
-    }
-}
-
-void MaxHeap::updatePtrsForInsert(nodo* nPtr, itM index)
-{   // le entrego al par actual un puntero a su ocurrencia anterior
-    // (esta ocurrencia anterior es la ultima ocurrencia que fue guardada en
-    // la struct del par en el map)
-    nPtr->prevOcurr = index->second.last;
-    // al penúltimo par le entrego su siguiente ocurrencia
-    nPtr->prevOcurr->nextOcurr = nPtr;
-    // la última ocurrencia del par termina siendo guardada en la stru del par en el map
-    index->second.last = nPtr;
 }
 
 void MaxHeap::shiftUp(int index) {
@@ -449,6 +454,7 @@ int MaxHeap::right(int index){
     return (index*2) + 2;
 } 
 
+// revisa los punteros [next/prev]Ocurr de un par entregandole su str que esta en el map
 void MaxHeap::checkPointers(str stru) {
     cout << vect->at(stru.heapIndex).first << endl;
     auto first = stru.first;
