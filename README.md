@@ -1,4 +1,4 @@
-# Re-Pair-algoritm
+# RePair algorithm
 Proyecto 2 de Estructura de Datos por Felipito &amp; Chulzito
 
 Re pair es un algoritmo de compresion de caracteres.
