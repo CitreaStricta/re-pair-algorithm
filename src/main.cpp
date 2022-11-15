@@ -20,10 +20,10 @@ int main(int argc, char* argv[])
     {
         c->addSequence(n);
 
-        start = clock();
-        c->sUno();
-        time += (double) ((double)clock() - (double)start) / CLOCKS_PER_SEC;
-        cout << "Tamanio de la LL1 despues de compresion: " << c->listU->size() << endl;
+        // start = clock();
+        // c->sUno();
+        // time += (double) ((double)clock() - (double)start) / CLOCKS_PER_SEC;
+        // cout << "Tamanio de la LL1 despues de compresion: " << c->listU->size() << endl;
 
         start = clock();
         c->sDos();
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
         cout << endl;
     }
 
-    cout << "Tiempo promedio sol.1: " << fixed << setprecision(10) << time/((double)(rep)) << endl;
+    //cout << "Tiempo promedio sol.1: " << fixed << setprecision(10) << time/((double)(rep)) << endl;
     cout << "Tiempo promedio sol.2: " << fixed << setprecision(10) << time2/((double)(rep)) << endl;
 
     delete c;

@@ -1,6 +1,6 @@
 
-main: all
-	g++ -o main main.o solUno.o MaxHeap.o LinkedList.o iterator.o controller.o
+repair: all
+	g++ -o repair main.o solUno.o MaxHeap.o LinkedList.o iterator.o controller.o
 
 all:
 	g++ -c src/controller/*.cpp
