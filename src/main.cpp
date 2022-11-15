@@ -11,7 +11,8 @@ int main(int argc, char* argv[])
 
     double time = (double) 0;
     double time2 = (double) 0;
-    int rep = 20;
+    // a mas "rep" mayor el tiempo de ejecucion pero mayor la precision del tiempo que toma la ejecucion
+    int rep = 1; 
     clock_t start;
 
     int n = (int) stoi(argv[1]);
