@@ -1,5 +1,6 @@
 #include "controller/controller.h"
 #include <iostream>
+// #include <string>
 #include <iomanip>
 #include <time.h>
 
@@ -14,18 +15,19 @@ int main(int argc, char* argv[])
     // a mas "rep" mayor el tiempo de ejecucion pero mayor la precision del tiempo que toma la ejecucion
     int rep = 1; 
     clock_t start;
-
     int n = (int) stoi(argv[1]);
     cout << n << endl << endl;
     for (int i = 0; i < rep; i++)
     {
         c->addSequence(n);
 
+        //!Solucion uno
         // start = clock();
         // c->sUno();
         // time += (double) ((double)clock() - (double)start) / CLOCKS_PER_SEC;
         // cout << "Tamanio de la LL1 despues de compresion: " << c->listU->size() << endl;
 
+        //!Solucion dos
         start = clock();
         c->sDos();
         time2 += (double) ((double)clock() - (double)start) / CLOCKS_PER_SEC;

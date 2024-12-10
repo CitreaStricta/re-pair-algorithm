@@ -1,11 +1,16 @@
-# RePair algorithm
-Proyecto 2 de Estructura de Datos por Felipito &amp; Chulzito
+# Proyecto de estructura de datos de comprecion de largas cadenas de caracteres haciendo uso del algoritmo Re-Pair
+Proyecto 2 de Estructura de Datos por Felipe Cerda y Vicente Schultz
 
-Re pair es un algoritmo de compresion de caracteres.
+El algoritmo de compresión Re-Pair (abreviatura de Recursive Pairing) es un método de compresión de datos sin pérdida diseñado para trabajar con secuencias de símbolos, como texto o datos binarios. Su objetivo principal es lograr una buena tasa de compresión utilizando un enfoque basado en la detección y sustitución de patrones repetidos en los datos.
 
-Dependencias:
-- gcc para compilar los archivos .cpp
+Puede revisar el documento donde se explica en detalle el funcionamiento del algoritmo [aqui]()
 
-Compilar ejecutando el makefile para generar los archivos .o y el ejecutable.
+## Requerimientos
+- "MinGW" para compilar archivos C++
+- "Make" para ejecutar el makefile (opcional)
 
-Para correr se debe indicar el ejecutable y la cantidad de caracteres a comprimir.
+Para correr el ejecutable indicar el nombre del ejecutable seguido del largo de la cadena de caracteres a comprimir.
+## Ejemplo de ejecución
+```console
+<nombrearchivo> 1000000
+```
